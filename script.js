@@ -1,0 +1,268 @@
+ /* =========================================
+   1. DATA & CONFIGURATION
+   ========================================= */
+   const healthLibrary = {
+    // VITAMINS
+    vitA: { name: "Vitamin A", min: 20, max: 60, unit: "µg/dL", lowInfo: "Can cause night blindness and dry skin.", optimalInfo: "Supports vision and immune health.", highInfo: "Excessive Vitamin A can be toxic." },
+    vitB1: { name: "Vitamin B1", min: 70, max: 180, unit: "nmol/L", lowInfo: "Low levels cause fatigue and irritability.", optimalInfo: "Great for nerve function!", highInfo: "High levels are rare/harmless." },
+    vitB6: { name: "Vitamin B6", min: 5, max: 50, unit: "µg/L", lowInfo: "May cause skin rashes or confusion.", optimalInfo: "Supports brain health.", highInfo: "Very high doses can cause nerve pain." },
+    vitB9: { name: "Folate (B9)", min: 4, max: 20, unit: "ng/mL", lowInfo: "Can cause anemia and weakness.", optimalInfo: "Essential for cell growth.", highInfo: "May mask B12 deficiency." },
+    vitB12: { name: "Vitamin B12", min: 200, max: 900, unit: "pg/mL", lowInfo: "Causes fatigue and nerve issues.", optimalInfo: "Nervous system is in top shape!", highInfo: "High B12 is usually from supplements." },
+    vitC: { name: "Vitamin C", min: 0.4, max: 2.0, unit: "mg/dL", lowInfo: "Weakens immunity and healing.", optimalInfo: "Strong antioxidant protection!", highInfo: "High doses can cause stomach upset." },
+    vitD: { name: "Vitamin D", min: 30, max: 100, unit: "ng/mL", lowInfo: "Weakens bones and immunity.", optimalInfo: "Bone density is well-supported!", highInfo: "Can lead to calcium buildup." },
+    vitE: { name: "Vitamin E", min: 5.5, max: 17, unit: "mg/L", lowInfo: "May cause muscle weakness.", optimalInfo: "Protects cells from damage.", highInfo: "Can interfere with blood clotting." },
+    vitK: { name: "Vitamin K", min: 0.1, max: 2.2, unit: "nmol/L", lowInfo: "Affects bone density and clotting.", optimalInfo: "Supports healthy blood and bones.", highInfo: "Consult a doctor if taking blood thinners." },
+    
+    // MINERALS
+    iron: { name: "Iron (Ferritin)", min: 30, max: 150, unit: "ng/mL", lowInfo: "Causes extreme fatigue.", optimalInfo: "Oxygen transport is efficient!", highInfo: "Can be taxing on the liver." },
+    magnesium: { name: "Magnesium", min: 1.7, max: 2.2, unit: "mg/dL", lowInfo: "Causes muscle cramps and anxiety.", optimalInfo: "Muscles and nerves are relaxed.", highInfo: "Can cause low blood pressure." },
+    zinc: { name: "Zinc", min: 60, max: 120, unit: "µg/dL", lowInfo: "Slows wound healing and immunity.", optimalInfo: "Immune system is strong!", highInfo: "Can interfere with copper absorption." },
+    calcium: { name: "Calcium", min: 8.5, max: 10.2, unit: "mg/dL", lowInfo: "Affects bone and tooth health.", optimalInfo: "Strong bones and heart rhythm.", highInfo: "Risk of kidney stones." },
+    potassium: { name: "Potassium", min: 3.5, max: 5.1, unit: "mmol/L", lowInfo: "Can cause heart palpitations.", optimalInfo: "Perfect fluid balance.", highInfo: "Dangerous for heart rhythm." },
+    selenium: { name: "Selenium", min: 70, max: 150, unit: "µg/L", lowInfo: "Affects thyroid function.", optimalInfo: "Thyroid and metabolism supported.", highInfo: "Can cause hair/nail loss." },
+    copper: { name: "Copper", min: 70, max: 140, unit: "µg/dL", lowInfo: "Can lead to anemia.", optimalInfo: "Supports connective tissue.", highInfo: "Can be toxic to the liver." },
+    iodine: { name: "Iodine", min: 100, max: 199, unit: "µg/L", lowInfo: "Causes thyroid issues/goiter.", optimalInfo: "Metabolism is running well.", highInfo: "Can trigger thyroid overactivity." },
+    manganese: { name: "Manganese", min: 4, max: 15, unit: "µg/L", lowInfo: "Affects bone formation.", optimalInfo: "Supports metabolism.", highInfo: "Can be neurotoxic at high levels." },
+    phosphorus: { name: "Phosphorus", min: 2.5, max: 4.5, unit: "mg/dL", lowInfo: "Causes bone pain and weakness.", optimalInfo: "Energy production is optimal!", highInfo: "Can affect kidney health." },
+    sodium: { name: "Sodium", min: 135, max: 145, unit: "mmol/L", lowInfo: "Causes confusion/headaches.", optimalInfo: "Fluid balance is stable.", highInfo: "Can lead to high blood pressure." }
+};
+
+/* =========================================
+   2. THE CORE ENGINE (Calculations)
+   ========================================= */
+function getStatus(value, min, max) {
+    if (value === "" || value === null) return "missing";
+    const num = Number(value);
+    if (num < min) return "low";
+    if (num > max) return "high";
+    return "optimal";
+}
+
+/* =========================================
+   3. THE ACTION (When button is clicked)
+   ========================================= */
+   function runAnalysis() {
+    // 1. Grab all 20 values from the HTML
+    const resultsToSave = {
+        vitA: document.getElementById('vitA-input').value,
+        vitB1: document.getElementById('vitB1-input').value,
+        vitB6: document.getElementById('vitB6-input').value,
+        vitB9: document.getElementById('vitB9-input').value,
+        vitB12: document.getElementById('vitB12-input').value,
+        vitC: document.getElementById('vitC-input').value,
+        vitD: document.getElementById('vitD-input').value,
+        vitE: document.getElementById('vitE-input').value,
+        vitK: document.getElementById('vitK-input').value,
+        iron: document.getElementById('iron-input').value,
+        magnesium: document.getElementById('magnesium-input').value,
+        zinc: document.getElementById('zinc-input').value,
+        calcium: document.getElementById('calcium-input').value,
+        potassium: document.getElementById('potassium-input').value,
+        selenium: document.getElementById('selenium-input').value,
+        copper: document.getElementById('copper-input').value,
+        iodine: document.getElementById('iodine-input').value,
+        manganese: document.getElementById('manganese-input').value,
+        phosphorus: document.getElementById('phosphorus-input').value,
+        sodium: document.getElementById('sodium-input').value
+    };
+
+    // 2. Save the raw numbers for the Results Dashboard
+    localStorage.setItem('userResults', JSON.stringify(resultsToSave));
+
+    // 3. Check for deficiencies (Low values) to help the Nutrition page
+    const deficiencies = [];
+    if (getStatus(resultsToSave.vitA, 20, 60) === "low") deficiencies.push("vitA");
+    if (getStatus(resultsToSave.vitB1, 70, 180) === "low") deficiencies.push("vitB1");
+    if (getStatus(resultsToSave.vitB6, 5, 50) === "low") deficiencies.push("vitB6");
+    if (getStatus(resultsToSave.vitB9, 4, 20) === "low") deficiencies.push("vitB9");
+    if (getStatus(resultsToSave.vitB12, 200, 900) === "low") deficiencies.push("vitB12");
+    if (getStatus(resultsToSave.vitC, 0.4, 2.0) === "low") deficiencies.push("vitC");
+    if (getStatus(resultsToSave.vitD, 30, 100) === "low") deficiencies.push("vitD");
+    if (getStatus(resultsToSave.vitE, 5.5, 17) === "low") deficiencies.push("vitE");
+    if (getStatus(resultsToSave.vitK, 0.1, 2.2) === "low") deficiencies.push("vitK");
+    if (getStatus(resultsToSave.iron, 30, 150) === "low") deficiencies.push("iron");
+    if (getStatus(resultsToSave.magnesium, 1.7, 2.2) === "low") deficiencies.push("magnesium");
+    if (getStatus(resultsToSave.zinc, 60, 120) === "low") deficiencies.push("zinc");
+    if (getStatus(resultsToSave.calcium, 8.5, 10.2) === "low") deficiencies.push("calcium");
+    if (getStatus(resultsToSave.potassium, 3.5, 5.1) === "low") deficiencies.push("potassium");
+    if (getStatus(resultsToSave.selenium, 70, 150) === "low") deficiencies.push("selenium");
+    if (getStatus(resultsToSave.copper, 70, 140) === "low") deficiencies.push("copper");
+    if (getStatus(resultsToSave.iodine, 100, 199) === "low") deficiencies.push("iodine");
+    if (getStatus(resultsToSave.manganese, 4, 15) === "low") deficiencies.push("manganese");
+    if (getStatus(resultsToSave.phosphorus, 2.5, 4.5) === "low") deficiencies.push("phosphorus");
+    if (getStatus(resultsToSave.sodium, 135, 145) === "low") deficiencies.push("sodium");
+
+    // 4. Save the "Needs" list for the Nutrition/Recipe pages
+    localStorage.setItem('userNeeds', JSON.stringify(deficiencies));
+
+    // 5. Move to the results page
+    window.location.href = "results.html";
+}
+/* =========================================
+   4. THE VISUALS (Rendering the Dashboard)
+   ========================================= */
+   function renderDashboard() {
+    const dashboard = document.getElementById('results-dashboard');
+    if (!dashboard) return; // Only run if we are on the results page
+
+    const savedResults = JSON.parse(localStorage.getItem('userResults')) || {};
+    
+    // 1. Create three buckets for sorting
+    let lowCards = "";
+    let highCards = "";
+    let optimalCards = "";
+
+    // 2. Loop through the library and sort into buckets
+    for (let key in healthLibrary) {
+        const value = savedResults[key];
+        const info = healthLibrary[key];
+        
+        // Skip if the user didn't enter a value for this biomarker
+        if (value === "" || value === undefined || value === null) continue;
+
+        const status = getStatus(value, info.min, info.max);
+        
+        // Create the HTML for this specific card
+        const cardHTML = `
+            <div class="card status-${status}">
+                <h3>${info.name}</h3>
+                <div class="score-display">${value} <small>${info.unit}</small></div>
+                <p class="status-label">Status: <strong>${status.toUpperCase()}</strong></p>
+                <hr>
+                <p class="insight-text">${status === 'low' ? info.lowInfo : (status === 'high' ? info.highInfo : info.optimalInfo)}</p>
+            </div>
+        `;
+
+        // 3. Put the card in the correct bucket
+        if (status === "low") {
+            lowCards += cardHTML;
+        } else if (status === "high") {
+            highCards += cardHTML;
+        } else {
+            optimalCards += cardHTML;
+        }
+    }
+
+    // 4. Inject into the dashboard in the requested order
+    dashboard.innerHTML = lowCards + highCards + optimalCards;
+}
+
+/* =========================================
+   5. INITIALIZATION (The "Start" Button)
+   ========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Link the button to the function
+    const analyzeBtn = document.getElementById('analyze-btn');
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', runAnalysis);
+    }
+
+    // 2. Show the dashboard immediately if we have saved data
+    renderDashboard();
+});
+
+/* =========================================
+   6. NUTRITION FILTERING
+   ========================================= */
+   function renderNutrition() {
+    const listContainer = document.getElementById('food-list-display');
+    if (!listContainer) return;
+
+    const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
+    
+    // 1. A simple list to match the ID to the Food Name
+    const foodMap = {
+        vitA: "Carrots & Sweet Potatoes",
+        vitB1: "Sunflower Seeds & Pork",
+        vitB6: "Chickpeas & Tuna",
+        vitB9: "Leafy Greens & Folate",
+        vitB12: "Beef & Nutritional Yeast",
+        vitC: "Bell Peppers & Citrus",
+        vitD: "Fatty Fish & Egg Yolks",
+        vitE: "Almonds & Spinach",
+        vitK: "Kale & Broccoli",
+        iron: "Lentils & Red Meat",
+        magnesium: "Dark Chocolate & Nuts",
+        zinc: "Oysters & Pumpkin Seeds",
+        calcium: "Dairy & Chia Seeds",
+        potassium: "Bananas & Avocados",
+        selenium: "Brazil Nuts & Tuna",
+        copper: "Mushrooms & Shellfish",
+        iodine: "Seaweed & Cod",
+        manganese: "Hazelnuts & Oats",
+        phosphorus: "Chicken & Fish",
+        sodium: "Celery & Olives"
+    };
+
+    // 2. Clear the list
+    listContainer.innerHTML = "";
+
+    if (needs.length === 0) {
+        listContainer.innerHTML = "<p>Your levels are optimal! Keep eating a variety of whole foods.</p>";
+        return;
+    }
+
+    // 3. For every need, add a simple row to the page
+    needs.forEach(need => {
+        // Get the friendly name from our healthLibrary (e.g. "Iron (Ferritin)")
+        const nutrientTitle = healthLibrary[need].name; 
+        
+        // Get the food from our foodMap above
+        const foodName = foodMap[need];
+
+        // Create the row
+        listContainer.innerHTML += `
+            <div class="food-row">
+                ${foodName} <span class="nutrient-name">${nutrientTitle}</span>
+            </div>
+        `;
+    });
+}
+
+// Update your existing DOMContentLoaded listener to include this:
+document.addEventListener('DOMContentLoaded', () => {
+    // ... your other init code ...
+    renderNutrition(); 
+});
+
+/* =========================================
+   7. RECIPE FILTERING
+   ========================================= */
+   function renderRecipes() {
+    const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
+
+    // Simple manual list - No magic, easy to read
+    if (needs.includes("vitA")) document.getElementById('recipe-vitA').style.display = "block";
+    if (needs.includes("vitB1")) document.getElementById('recipe-vitB1').style.display = "block";
+    if (needs.includes("vitB6")) document.getElementById('recipe-vitB6').style.display = "block";
+    if (needs.includes("vitB9")) document.getElementById('recipe-vitB9').style.display = "block";
+    if (needs.includes("vitB12")) document.getElementById('recipe-vitB12').style.display = "block";
+    if (needs.includes("vitC")) document.getElementById('recipe-vitC').style.display = "block";
+    if (needs.includes("vitD")) document.getElementById('recipe-vitD').style.display = "block";
+    if (needs.includes("vitE")) document.getElementById('recipe-vitE').style.display = "block";
+    if (needs.includes("vitK")) document.getElementById('recipe-vitK').style.display = "block";
+    if (needs.includes("iron")) document.getElementById('recipe-iron').style.display = "block";
+    if (needs.includes("magnesium")) document.getElementById('recipe-magnesium').style.display = "block";
+    if (needs.includes("zinc")) document.getElementById('recipe-zinc').style.display = "block";
+    if (needs.includes("calcium")) document.getElementById('recipe-calcium').style.display = "block";
+    if (needs.includes("potassium")) document.getElementById('recipe-potassium').style.display = "block";
+    if (needs.includes("selenium")) document.getElementById('recipe-selenium').style.display = "block";
+    if (needs.includes("copper")) document.getElementById('recipe-copper').style.display = "block";
+    if (needs.includes("iodine")) document.getElementById('recipe-iodine').style.display = "block";
+    if (needs.includes("manganese")) document.getElementById('recipe-manganese').style.display = "block";
+    if (needs.includes("phosphorus")) document.getElementById('recipe-phosphorus').style.display = "block";
+    if (needs.includes("sodium")) document.getElementById('recipe-sodium').style.display = "block";
+}
+
+// Update your DOMContentLoaded one last time to include this:
+document.addEventListener('DOMContentLoaded', () => {
+    // ... other code ...
+    renderRecipes();
+});
+
+
+// Update your existing DOMContentLoaded listener to include this:
+document.addEventListener('DOMContentLoaded', () => {
+    // ... your other init code ...
+    renderNutrition(); 
+});
