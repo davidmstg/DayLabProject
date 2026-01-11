@@ -388,3 +388,14 @@ input:focus {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+/* --- THE IMAGE SHIELD (Fixes the ruined look) --- */
+.recipe-card {
+    overflow: hidden; /* Stops images from bleeding out of the cards */
+}
+
+.recipe-card img {
+    width: 100% !important;   /* Forces image to stay inside the card */
+    height: 220px !important;  /* Stops them from being giant */
+    object-fit: cover;        /* Zooms and crops perfectly */
+    display: block;
+}
