@@ -416,51 +416,55 @@ footer {
     display: block;
 }
 /* =========================================
-   13. MOBILE RESPONSIVE ENGINE (The Fix)
+   13. MOBILE RESPONSIVE ENGINE (STRONGER VERSION)
    ========================================= */
 @media screen and (max-width: 768px) {
     
-    /* 1. Stack the Navigation Menu */
+    /* 1. Force container to stop side-scrolling */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        position: relative;
+    }
+
+    .container {
+        width: 100% !important;
+        padding: 0 20px !important;
+        margin: 0 !important;
+    }
+
+    /* 2. Stack the Navigation Vertically */
     nav {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
     }
-
     nav ul {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-        width: 100%;
-        padding: 0;
+        flex-direction: column !important;
+        padding: 0 !important;
+        gap: 15px !important;
     }
 
-    /* 2. Make Cards Fluid (Fit the phone width) */
-    .card {
-        width: 100% !important; /* Overrides the 320px fixed width */
-        max-width: 400px;       /* Stops them from getting too big on tablets */
-        margin: 10px 0 !important;
+    /* 3. Force Cards to fit the screen */
+    .card, .recipe-card {
+        width: 100% !important;
+        max-width: 100% !important; /* Uses full phone width */
+        margin: 15px 0 !important;
+        height: auto !important; /* Let height grow if text is long */
     }
 
-    /* 3. Fix the Results Dashboard alignment on mobile */
-    #results-dashboard {
-        flex-direction: column;
-        align-items: center;
+    /* 4. Fix Image Sizing on Mobile */
+    .recipe-card img {
+        width: 100% !important;
+        height: auto !important; /* Allows image to scale naturally */
+        max-height: 250px !important;
     }
 
-    /* 4. Fix the Timeline (Stack it vertically) */
-    .timeline::after { left: 31px; }
-    .timeline-item { 
-        width: 100%; 
-        padding-left: 70px; 
-        padding-right: 25px; 
-        text-align: left; 
+    /* 5. Center the Results Dashboard */
+    #results-dashboard, #nutrition-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
     }
-    .timeline-item.right { left: 0%; }
-    .timeline-dot { left: 21px; right: auto; }
-
-    /* 5. Shrink huge text */
-    h1 { font-size: 1.8rem; }
-    
-    /* 6. Ensure Container padding doesn't squish cards */
-    .container { padding: 0 15px; }
 }
