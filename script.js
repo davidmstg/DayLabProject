@@ -1,7 +1,7 @@
- /* =========================================
+/* =========================================
    1. DATA & CONFIGURATION
    ========================================= */
-   const healthLibrary = {
+const healthLibrary = {
     // VITAMINS
     vitA: { name: "Vitamin A", min: 20, max: 60, unit: "µg/dL", lowInfo: "Can cause night blindness and dry skin.", optimalInfo: "Supports vision and immune health.", highInfo: "Excessive Vitamin A can be toxic." },
     vitB1: { name: "Vitamin B1", min: 70, max: 180, unit: "nmol/L", lowInfo: "Low levels cause fatigue and irritability.", optimalInfo: "Great for nerve function!", highInfo: "High levels are rare/harmless." },
@@ -41,8 +41,8 @@ function getStatus(value, min, max) {
 /* =========================================
    3. THE ACTION (When button is clicked)
    ========================================= */
-   function runAnalysis() {
-    // 1. Grab all 20 values from the HTML
+function runAnalysis() {
+    // 1. Grab all 20 values from the HTML inputs
     const resultsToSave = {
         vitA: document.getElementById('vitA-input').value,
         vitB1: document.getElementById('vitB1-input').value,
@@ -69,7 +69,7 @@ function getStatus(value, min, max) {
     // 2. Save the raw numbers for the Results Dashboard
     localStorage.setItem('userResults', JSON.stringify(resultsToSave));
 
-    // 3. Check for deficiencies (Low values) to help the Nutrition page
+    // 3. Check for deficiencies (Low values)
     const deficiencies = [];
     if (getStatus(resultsToSave.vitA, 20, 60) === "low") deficiencies.push("vitA");
     if (getStatus(resultsToSave.vitB1, 70, 180) === "low") deficiencies.push("vitB1");
@@ -98,31 +98,25 @@ function getStatus(value, min, max) {
     // 5. Move to the results page
     window.location.href = "results.html";
 }
+
 /* =========================================
    4. THE VISUALS (Rendering the Dashboard)
    ========================================= */
-   function renderDashboard() {
+function renderDashboard() {
     const dashboard = document.getElementById('results-dashboard');
-    if (!dashboard) return; // Only run if we are on the results page
+    if (!dashboard) return;
 
     const savedResults = JSON.parse(localStorage.getItem('userResults')) || {};
-    
-    // 1. Create three buckets for sorting
     let lowCards = "";
     let highCards = "";
     let optimalCards = "";
 
-    // 2. Loop through the library and sort into buckets
     for (let key in healthLibrary) {
         const value = savedResults[key];
         const info = healthLibrary[key];
-        
-        // Skip if the user didn't enter a value for this biomarker
         if (value === "" || value === undefined || value === null) continue;
 
         const status = getStatus(value, info.min, info.max);
-        
-        // Create the HTML for this specific card
         const cardHTML = `
             <div class="card status-${status}">
                 <h3>${info.name}</h3>
@@ -133,84 +127,40 @@ function getStatus(value, min, max) {
             </div>
         `;
 
-        // 3. Put the card in the correct bucket
-        if (status === "low") {
-            lowCards += cardHTML;
-        } else if (status === "high") {
-            highCards += cardHTML;
-        } else {
-            optimalCards += cardHTML;
-        }
+        if (status === "low") { lowCards += cardHTML; }
+        else if (status === "high") { highCards += cardHTML; }
+        else { optimalCards += cardHTML; }
     }
-
-    // 4. Inject into the dashboard in the requested order
     dashboard.innerHTML = lowCards + highCards + optimalCards;
 }
 
 /* =========================================
-   5. INITIALIZATION (The "Start" Button)
-   ========================================= */
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Link the button to the function
-    const analyzeBtn = document.getElementById('analyze-btn');
-    if (analyzeBtn) {
-        analyzeBtn.addEventListener('click', runAnalysis);
-    }
-
-    // 2. Show the dashboard immediately if we have saved data
-    renderDashboard();
-});
-
-/* =========================================
    6. NUTRITION FILTERING
    ========================================= */
-   function renderNutrition() {
+function renderNutrition() {
     const listContainer = document.getElementById('food-list-display');
     if (!listContainer) return;
 
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
-    
-    // 1. A simple list to match the ID to the Food Name
     const foodMap = {
-        vitA: "Carrots & Sweet Potatoes",
-        vitB1: "Sunflower Seeds & Pork",
-        vitB6: "Chickpeas & Tuna",
-        vitB9: "Leafy Greens & Folate",
-        vitB12: "Beef & Nutritional Yeast",
-        vitC: "Bell Peppers & Citrus",
-        vitD: "Fatty Fish & Egg Yolks",
-        vitE: "Almonds & Spinach",
-        vitK: "Kale & Broccoli",
-        iron: "Lentils & Red Meat",
-        magnesium: "Dark Chocolate & Nuts",
-        zinc: "Oysters & Pumpkin Seeds",
-        calcium: "Dairy & Chia Seeds",
-        potassium: "Bananas & Avocados",
-        selenium: "Brazil Nuts & Tuna",
-        copper: "Mushrooms & Shellfish",
-        iodine: "Seaweed & Cod",
-        manganese: "Hazelnuts & Oats",
-        phosphorus: "Chicken & Fish",
-        sodium: "Celery & Olives"
+        vitA: "Carrots & Sweet Potatoes", vitB1: "Sunflower Seeds & Pork", vitB6: "Chickpeas & Tuna",
+        vitB9: "Leafy Greens & Folate", vitB12: "Beef & Nutritional Yeast", vitC: "Bell Peppers & Citrus",
+        vitD: "Fatty Fish & Egg Yolks", vitE: "Almonds & Spinach", vitK: "Kale & Broccoli",
+        iron: "Lentils & Red Meat", magnesium: "Dark Chocolate & Nuts", zinc: "Oysters & Pumpkin Seeds",
+        calcium: "Dairy & Chia Seeds", potassium: "Bananas & Avocados", selenium: "Brazil Nuts & Tuna",
+        copper: "Mushrooms & Shellfish", iodine: "Seaweed & Cod", manganese: "Hazelnuts & Oats",
+        phosphorus: "Chicken & Fish", sodium: "Celery & Olives"
     };
 
-    // 2. Clear the list
     listContainer.innerHTML = "";
-
     if (needs.length === 0) {
         listContainer.innerHTML = "<p>Your levels are optimal! Keep eating a variety of whole foods.</p>";
         return;
     }
 
-    // 3. For every need, add a simple row to the page
     needs.forEach(need => {
-        // Get the friendly name from our healthLibrary (e.g. "Iron (Ferritin)")
         const nutrientTitle = healthLibrary[need].name; 
-        
-        // Get the food from our foodMap above
         const foodName = foodMap[need];
-
-        // Create the row
         listContainer.innerHTML += `
             <div class="food-row">
                 ${foodName} <span class="nutrient-name">${nutrientTitle}</span>
@@ -219,19 +169,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 }
 
-// Update your existing DOMContentLoaded listener to include this:
-document.addEventListener('DOMContentLoaded', () => {
-    // ... your other init code ...
-    renderNutrition(); 
-});
-
 /* =========================================
    7. RECIPE FILTERING
    ========================================= */
-   function renderRecipes() {
+function renderRecipes() {
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
+    // Only run if on the recipes page
+    if (!document.getElementById('recipe-vitA')) return; 
 
-    // Simple manual list - No magic, easy to read
     if (needs.includes("vitA")) document.getElementById('recipe-vitA').style.display = "block";
     if (needs.includes("vitB1")) document.getElementById('recipe-vitB1').style.display = "block";
     if (needs.includes("vitB6")) document.getElementById('recipe-vitB6').style.display = "block";
@@ -254,15 +199,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (needs.includes("sodium")) document.getElementById('recipe-sodium').style.display = "block";
 }
 
-// Update your DOMContentLoaded one last time to include this:
+/* =========================================
+   5. INITIALIZATION
+   ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
-    // ... other code ...
+    const analyzeBtn = document.getElementById('analyze-btn');
+    if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', runAnalysis);
+    }
+    renderDashboard();
+    renderNutrition();
     renderRecipes();
-});
-
-
-// Update your existing DOMContentLoaded listener to include this:
-document.addEventListener('DOMContentLoaded', () => {
-    // ... your other init code ...
-    renderNutrition(); 
 });
