@@ -71,26 +71,11 @@ function runAnalysis() {
 
     // 3. Check for deficiencies (Low values)
     const deficiencies = [];
-    if (getStatus(resultsToSave.vitA, 20, 60) === "low") deficiencies.push("vitA");
-    if (getStatus(resultsToSave.vitB1, 70, 180) === "low") deficiencies.push("vitB1");
-    if (getStatus(resultsToSave.vitB6, 5, 50) === "low") deficiencies.push("vitB6");
-    if (getStatus(resultsToSave.vitB9, 4, 20) === "low") deficiencies.push("vitB9");
-    if (getStatus(resultsToSave.vitB12, 200, 900) === "low") deficiencies.push("vitB12");
-    if (getStatus(resultsToSave.vitC, 0.4, 2.0) === "low") deficiencies.push("vitC");
-    if (getStatus(resultsToSave.vitD, 30, 100) === "low") deficiencies.push("vitD");
-    if (getStatus(resultsToSave.vitE, 5.5, 17) === "low") deficiencies.push("vitE");
-    if (getStatus(resultsToSave.vitK, 0.1, 2.2) === "low") deficiencies.push("vitK");
-    if (getStatus(resultsToSave.iron, 30, 150) === "low") deficiencies.push("iron");
-    if (getStatus(resultsToSave.magnesium, 1.7, 2.2) === "low") deficiencies.push("magnesium");
-    if (getStatus(resultsToSave.zinc, 60, 120) === "low") deficiencies.push("zinc");
-    if (getStatus(resultsToSave.calcium, 8.5, 10.2) === "low") deficiencies.push("calcium");
-    if (getStatus(resultsToSave.potassium, 3.5, 5.1) === "low") deficiencies.push("potassium");
-    if (getStatus(resultsToSave.selenium, 70, 150) === "low") deficiencies.push("selenium");
-    if (getStatus(resultsToSave.copper, 70, 140) === "low") deficiencies.push("copper");
-    if (getStatus(resultsToSave.iodine, 100, 199) === "low") deficiencies.push("iodine");
-    if (getStatus(resultsToSave.manganese, 4, 15) === "low") deficiencies.push("manganese");
-    if (getStatus(resultsToSave.phosphorus, 2.5, 4.5) === "low") deficiencies.push("phosphorus");
-    if (getStatus(resultsToSave.sodium, 135, 145) === "low") deficiencies.push("sodium");
+    for (let key in resultsToSave) {
+        if (getStatus(resultsToSave[key], healthLibrary[key].min, healthLibrary[key].max) === "low") {
+            deficiencies.push(key);
+        }
+    }
 
     // 4. Save the "Needs" list for the Nutrition/Recipe pages
     localStorage.setItem('userNeeds', JSON.stringify(deficiencies));
@@ -104,12 +89,10 @@ function runAnalysis() {
    ========================================= */
 function renderDashboard() {
     const dashboard = document.getElementById('results-dashboard');
-    if (!dashboard) return;
+    if (!dashboard) return; // Only run if we are on the results page
 
     const savedResults = JSON.parse(localStorage.getItem('userResults')) || {};
-    let lowCards = "";
-    let highCards = "";
-    let optimalCards = "";
+    let lowCards = "", highCards = "", optimalCards = "";
 
     for (let key in healthLibrary) {
         const value = savedResults[key];
@@ -135,7 +118,7 @@ function renderDashboard() {
 }
 
 /* =========================================
-   6. NUTRITION FILTERING
+   5. NUTRITION FILTERING
    ========================================= */
 function renderNutrition() {
     const listContainer = document.getElementById('food-list-display');
@@ -170,7 +153,7 @@ function renderNutrition() {
 }
 
 /* =========================================
-   7. RECIPE FILTERING
+   6. RECIPE FILTERING (Manual Style)
    ========================================= */
 function renderRecipes() {
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
@@ -197,10 +180,14 @@ function renderRecipes() {
     if (needs.includes("manganese")) document.getElementById('recipe-manganese').style.display = "block";
     if (needs.includes("phosphorus")) document.getElementById('recipe-phosphorus').style.display = "block";
     if (needs.includes("sodium")) document.getElementById('recipe-sodium').style.display = "block";
+
+    // Show the "optimal" message if the needs list is empty
+    const msg = document.getElementById('no-recipes-msg');
+    if (msg && needs.length === 0) msg.style.display = "block";
 }
 
 /* =========================================
-   5. INITIALIZATION
+   7. INITIALIZATION
    ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
     const analyzeBtn = document.getElementById('analyze-btn');
