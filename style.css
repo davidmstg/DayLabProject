@@ -1,17 +1,18 @@
-/* 1. VARIABLES (The Control Panel) */
-   :root {
-    /* Colors */
+/* =========================================
+   1. VARIABLES (The Control Panel) 
+   ========================================= */
+:root {
     --primary-green: #E6F0E4;
     --accent-red: #A63A3A;
     --dark-text: #2F4F4F;
     --white: #FFFFFF;
     --gray-border: #ccc;
-
-    /* Typography */
     --main-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* 2. RESET & BASE (The Foundation) */
+/* =========================================
+   2. RESET & BASE 
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -25,7 +26,9 @@ body {
     line-height: 1.6;
 }
 
-/* 3. LAYOUT */
+/* =========================================
+   3. LAYOUT 
+   ========================================= */
 .container { 
     max-width: 1100px; 
     margin: 0 auto; 
@@ -33,14 +36,16 @@ body {
 }
 
 section {
-    padding: 60px 0; /* Vertical breathing room between sections */
+    padding: 60px 0;
 }
 
 .text-center {
     text-align: center;
 }
 
-/* 4. NAVIGATION */
+/* =========================================
+   4. NAVIGATION 
+   ========================================= */
 nav { 
     display: flex; 
     justify-content: space-between; 
@@ -65,7 +70,9 @@ nav ul li a:hover {
     color: var(--accent-red);
 }
 
-/* 5. TEXT / TYPOGRAPHY */
+/* =========================================
+   5. TEXT / TYPOGRAPHY 
+   ========================================= */
 h1 { 
     font-size: 2.5rem; 
     color: var(--dark-text); 
@@ -76,7 +83,9 @@ p {
     margin-bottom: 15px;
 }
 
-/* 6. BUTTONS (The Interaction) */
+/* =========================================
+   6. BUTTONS 
+   ========================================= */
 .btn-main { 
     background: var(--accent-red); 
     color: var(--white); 
@@ -94,380 +103,17 @@ p {
     transform: translateY(-2px);
 }
 
-/* --- STATUS COLORS --- */
-.status-low {
-    border-left: 10px solid #D9534F; /* Red stripe */
-    background-color: #f9ebeb;
-}
-
-.status-normal {
-    border-left: 10px solid #5CB85C; /* Green stripe */
-    background-color: #edf7ed;
-}
-
-.status-high {
-    border-left: 10px solid #F0AD4E; /* Orange stripe */
-    background-color: #fdf5e6;
-}
-
-/* 7. FORMS & INPUTS */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-input { 
-    padding: 12px; 
-    border: 1px solid var(--gray-border); 
-    border-radius: 4px; 
-    font-size: 1rem;
-}
-
-input:focus {
-    outline: 2px solid var(--accent-red);
-    border-color: transparent;
-}
-
-/* 8. CARDS & GRIDS */
-.recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.card { 
-    background: var(--white); 
-    border-radius: 8px; 
-    padding: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-}
-
-/* --- STATUS DASHBOARD STYLES --- */
-.score-display {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.status-label {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-}
-
-.insight-text {
-    font-size: 0.85rem;
-    margin-top: 10px;
-    font-style: italic;
-}
-
-/* Color coding the cards */
-.card.status-low { border-top: 5px solid var(--accent-red); }
-.card.status-optimal { border-top: 5px solid #5CB85C; }
-.card.status-high { border-top: 5px solid #F0AD4E; }
-
-
-/* =========================================
-   9. TIMELINE (Process Design)
-   ========================================= */
-
-   .timeline {
-    position: relative;
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px 0;
-}
-
-/* The vertical line in the middle */
-.timeline::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    background-color: var(--accent-red);
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -2px;
-}
-
-.timeline-item {
-    padding: 10px 40px;
-    position: relative;
-    width: 50%; /* Half width */
-}
-
-/* The dots on the timeline */
-.timeline-dot {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    right: -10px; /* Centered on the line */
-    background-color: var(--white);
-    border: 4px solid var(--accent-red);
-    top: 40px;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-.timeline-item.right .timeline-dot {
-    left: -10px;
-}
-
-/* Left & Right positioning */
-.timeline-item.left { left: 0; text-align: right; }
-.timeline-item.right { left: 50%; text-align: left; }
-
-/* Labels (Phase 1, etc.) */
-.phase-label {
-    display: block;
-    color: var(--accent-red);
-    font-weight: bold;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-
-/* Small correction for the button in the card */
 .btn-outline {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 15px;
+    display: block;
+    margin: auto 20px 20px 20px; /* Aligns with text and pushes to bottom */
+    padding: 10px 15px;
     border: 1px solid var(--accent-red);
     color: var(--accent-red);
     text-decoration: none;
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: bold;
-}
-
-/* RESPONSIVE: On small screens, make it a single column */
-@media screen and (max-width: 768px) {
-    .timeline::after { left: 31px; }
-    .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; }
-    .timeline-item.right { left: 0%; }
-    .timeline-dot { left: 21px; right: auto; }
-}
-
-/* =========================================
-   10. MEDICAL FORM STYLING
-   ========================================= */
-
-   .medical-form {
-    padding: 0; /* Remove default card padding to use header styling */
-    overflow: hidden;
-    border: 1px solid var(--gray-border);
-}
-
-.card-header {
-    background-color: var(--dark-text);
-    color: var(--white);
-    padding: 15px 25px;
-    margin-bottom: 20px;
-}
-
-.medical-form .form-group {
-    padding: 0 25px 20px 25px;
-}
-
-.medical-form label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--dark-text);
-    margin-bottom: 8px;
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* The wrapper that holds the input + ng/mL */
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.input-wrapper input {
-    width: 100%;
-    padding: 14px 15px;
-    padding-right: 70px; /* Space for the unit text */
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-}
-
-.input-wrapper input:focus {
-    border-color: var(--accent-red);
-    box-shadow: 0 0 0 4px rgba(166, 58, 58, 0.1);
-    outline: none;
-}
-
-/* The "ng/mL" text inside the box */
-.input-wrapper .unit {
-    position: absolute;
-    right: 15px;
-    color: #888;
-    font-weight: 600;
-    font-size: 0.85rem;
-    pointer-events: none; /* Allows user to click "through" the text */
-}
-
-.form-footer {
-    padding: 15px 25px;
-    background-color: #f8fcf8;
-    border-top: 1px solid #eee;
     text-align: center;
-    color: #666;
-}
-
-/* =========================================
-   11. PROGRESS BAR
-   ========================================= */
-
-   .progress-wrapper {
-    padding: 40px 0;
-}
-
-.progress-steps {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* The horizontal gray line behind circles */
-.progress-line {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--gray-border);
-    z-index: 0;
-}
-
-.step {
-    position: relative;
-    z-index: 1;
-    width: 40px;
-    height: 40px;
-    background-color: var(--white);
-    border: 2px solid var(--gray-border);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: var(--gray-border);
-    transition: all 0.3s ease;
-}
-
-/* Styling for the Active/Completed Step */
-.step.active {
-    border-color: var(--accent-red);
-    background-color: var(--accent-red);
-    color: var(--white);
-}
-
-.step.active .step-label {
-    color: var(--accent-red);
-    font-weight: bold;
-}
-
-/* Labels under the circles */
-.step-label {
-    position: absolute;
-    top: 50px;
-    white-space: nowrap;
-    font-size: 0.75rem;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.hero-section {
-    /* 1. The Image: Replace 'hero-bg.jpg' with your actual filename */
-    /* If you use a link from the web, put it in the quotes */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                      url('hero-bg.jpg'); 
-    
-    /* 2. Positioning */
-    background-size: cover;       /* Makes image fill the whole area */
-    background-position: center;  /* Centers the image */
-    background-repeat: no-repeat;
-    
-    /* 3. Spacing */
-    padding: 120px 0;             /* Increases space above/below the title */
-    color: var(--white);          /* Changes text to white to stand out */
-}
-
-/* Make sure the paragraph in the hero is also white */
-.hero-section p {
-    color: var(--white);
-    font-size: 1.2rem;
-}
-
-footer {
-    text-align: center;
-    padding: 40px 0;
-    border-top: 1px solid var(--gray-border); /* Adds a clean separation line */
-    margin-top: 60px; /* Pushes the footer away from your cards/content */
-}
-
-/* Add a small indicator for "Low" status to make it stand out more */
-.card.status-low {
-    border-top: 8px solid var(--accent-red);
-    background-color: #fffafa; /* Very subtle red tint */
-}
-
-/* Optional: Add a title to the sections if you want them separated visually */
-.dashboard-heading {
-    grid-column: 1 / -1; /* Makes the heading span the full width of the grid */
-    margin-top: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--gray-border);
-    font-size: 1.2rem;
-    color: var(--dark-text);
-}
-
-/* Styling for the list rows */
-.food-row {
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-    font-size: 1.1rem;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-between; /* Pushes vitamin name to the right */
-    align-items: center;
-}
-
-/* The smaller, lighter vitamin text */
-.nutrient-name {
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: #999; /* Light gray */
-    margin-left: 10px;
-}
-
-.nutrition-summary-card h3 {
-    margin-bottom: 15px;
-    color: var(--dark-text);
-}
-
-.btn-outline {
-    display: inline-block;
-    padding: 8px 16px;
-    border: 1px solid var(--accent-red);
-    color: var(--accent-red);
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-top: 15px;
     transition: all 0.2s;
 }
 
@@ -476,42 +122,93 @@ footer {
     color: white;
 }
 
-/* 1. Fix Button Heights (Flexbox Magic) */
-.recipe-card {
+/* =========================================
+   7. FORMS & INPUTS 
+   ========================================= */
+.form-group {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Ensures all cards in a row are same height */
-    justify-content: space-between;
-    padding: 25px;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
-/* 2. Style the "Supports" Info */
-.recipe-benefit {
-    background-color: var(--primary-green);
-    color: var(--dark-text);
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    margin: 15px 0;
-    border-left: 4px solid var(--accent-red);
+input { 
+    padding: 12px; 
+    border: 1px solid var(--gray-border); 
+    border-radius: 4px; 
 }
 
-.recipe-benefit strong {
-    color: var(--accent-red);
-    text-transform: uppercase;
-    font-size: 0.75rem;
+/* =========================================
+   8. RECIPE GRID & CARD FIXES
+   ========================================= */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 25px;
+    margin-top: 30px;
+    padding-bottom: 50px;
 }
 
-/* 3. Push Button to Bottom */
-.recipe-card .btn-outline {
-    margin-top: auto; /* This is the key to perfectly aligned buttons! */
-    text-align: center;
+.recipe-card { 
+    background: var(--white); 
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Clips image to border radius */
+    height: 100%;
+}
+
+/* THIS FIXES THE WHITE GAPS */
+.recipe-img {
     width: 100%;
+    height: 220px;         /* Standard height for all images */
+    object-fit: cover;     /* ZOOM & CROP to fill the box perfectly */
+    display: block;
 }
 
-/* 4. Fix Link Clickability */
-.recipe-card a {
-    position: relative;
-    z-index: 10; /* Ensures the link is "above" other elements */
-    cursor: pointer;
+.recipe-card h3 {
+    padding: 20px 20px 10px 20px;
+    color: var(--dark-text);
+}
+
+.recipe-card p {
+    padding: 0 20px 20px 20px;
+    font-size: 0.9rem;
+    flex-grow: 1;          /* Pushes button to bottom */
+}
+
+/* =========================================
+   9. STATUS DASHBOARD STYLES
+   ========================================= */
+.card.status-low { border-top: 5px solid var(--accent-red); background-color: #fffafa; }
+.card.status-optimal { border-top: 5px solid #5CB85C; }
+.card.status-high { border-top: 5px solid #F0AD4E; }
+
+.score-display { font-size: 2rem; font-weight: bold; margin: 10px 0; }
+.insight-text { font-size: 0.85rem; font-style: italic; }
+
+/* =========================================
+   10. PROGRESS BAR
+   ========================================= */
+.progress-wrapper { padding: 40px 0; }
+.progress-steps { display: flex; justify-content: space-between; position: relative; max-width: 800px; margin: 0 auto; }
+.progress-line { position: absolute; top: 20px; left: 0; width: 100%; height: 2px; background-color: var(--gray-border); z-index: 0; }
+
+.step {
+    position: relative; z-index: 1; width: 40px; height: 40px; background-color: var(--white);
+    border: 2px solid var(--gray-border); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+
+.step.active { border-color: var(--accent-red); background-color: var(--accent-red); color: var(--white); }
+.step-label { position: absolute; top: 50px; white-space: nowrap; font-size: 0.75rem; color: #888; }
+
+/* =========================================
+   11. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--gray-border);
+    margin-top: 60px;
 }
