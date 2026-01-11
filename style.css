@@ -105,7 +105,7 @@ p {
 
 .btn-outline {
     display: block;
-    margin: auto 20px 20px 20px; /* Aligns with text and pushes to bottom */
+    margin: auto 20px 20px 20px; 
     padding: 10px 15px;
     border: 1px solid var(--accent-red);
     color: var(--accent-red);
@@ -152,18 +152,19 @@ input {
 .recipe-card { 
     background: var(--white); 
     border-radius: 12px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Clips image to border radius */
+    overflow: hidden; /* Important for rounding image corners */
     height: 100%;
 }
 
-/* THIS FIXES THE WHITE GAPS */
+/* THIS FIXES THE "TOO BIG" IMAGE OVERFLOW */
 .recipe-img {
     width: 100%;
-    height: 220px;         /* Standard height for all images */
-    object-fit: cover;     /* ZOOM & CROP to fill the box perfectly */
+    height: 250px;         /* Standardized height */
+    object-fit: cover;     /* Crops the big images to fit perfectly */
+    object-position: center;
     display: block;
 }
 
