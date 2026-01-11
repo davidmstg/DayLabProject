@@ -415,3 +415,52 @@ footer {
     object-fit: cover;        
     display: block;
 }
+/* =========================================
+   13. MOBILE RESPONSIVE ENGINE (The Fix)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Stack the Navigation Menu */
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    /* 2. Make Cards Fluid (Fit the phone width) */
+    .card {
+        width: 100% !important; /* Overrides the 320px fixed width */
+        max-width: 400px;       /* Stops them from getting too big on tablets */
+        margin: 10px 0 !important;
+    }
+
+    /* 3. Fix the Results Dashboard alignment on mobile */
+    #results-dashboard {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 4. Fix the Timeline (Stack it vertically) */
+    .timeline::after { left: 31px; }
+    .timeline-item { 
+        width: 100%; 
+        padding-left: 70px; 
+        padding-right: 25px; 
+        text-align: left; 
+    }
+    .timeline-item.right { left: 0%; }
+    .timeline-dot { left: 21px; right: auto; }
+
+    /* 5. Shrink huge text */
+    h1 { font-size: 1.8rem; }
+    
+    /* 6. Ensure Container padding doesn't squish cards */
+    .container { padding: 0 15px; }
+}
