@@ -41,7 +41,10 @@ function getStatus(value, min, max) {
 /* =========================================
    3. THE ACTION (When button is clicked)
    ========================================= */
-function runAnalysis() {
+function runAnalysis(e) {
+    // PREVENT THE FORM FROM RELOADING THE PAGE
+    if(e) e.preventDefault(); 
+
     // 1. Grab all 20 values from the HTML inputs
     const resultsToSave = {
         vitA: document.getElementById('vitA-input').value,
@@ -72,8 +75,10 @@ function runAnalysis() {
     // 3. Check for deficiencies (Low values)
     const deficiencies = [];
     for (let key in resultsToSave) {
-        if (getStatus(resultsToSave[key], healthLibrary[key].min, healthLibrary[key].max) === "low") {
-            deficiencies.push(key);
+        if (resultsToSave[key] !== "") { // Only check if user typed something
+            if (getStatus(resultsToSave[key], healthLibrary[key].min, healthLibrary[key].max) === "low") {
+                deficiencies.push(key);
+            }
         }
     }
 
@@ -93,19 +98,24 @@ function renderDashboard() {
 
     const savedResults = JSON.parse(localStorage.getItem('userResults')) || {};
     let lowCards = "", highCards = "", optimalCards = "";
+    let hasData = false;
 
     for (let key in healthLibrary) {
         const value = savedResults[key];
         const info = healthLibrary[key];
+        
+        // Skip empty inputs
         if (value === "" || value === undefined || value === null) continue;
 
+        hasData = true;
         const status = getStatus(value, info.min, info.max);
+        
         const cardHTML = `
             <div class="card status-${status}">
                 <h3>${info.name}</h3>
                 <div class="score-display">${value} <small>${info.unit}</small></div>
                 <p class="status-label">Status: <strong>${status.toUpperCase()}</strong></p>
-                <hr>
+                <hr style="opacity:0.3; margin:10px 0;">
                 <p class="insight-text">${status === 'low' ? info.lowInfo : (status === 'high' ? info.highInfo : info.optimalInfo)}</p>
             </div>
         `;
@@ -114,17 +124,23 @@ function renderDashboard() {
         else if (status === "high") { highCards += cardHTML; }
         else { optimalCards += cardHTML; }
     }
-    dashboard.innerHTML = lowCards + highCards + optimalCards;
+
+    if (hasData) {
+        dashboard.innerHTML = lowCards + highCards + optimalCards;
+    }
 }
 
 /* =========================================
    5. NUTRITION FILTERING
    ========================================= */
 function renderNutrition() {
-    const listContainer = document.getElementById('food-list-display');
+    // UPDATED ID to match your new HTML
+    const listContainer = document.getElementById('nutrition-container');
     if (!listContainer) return;
 
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
+    
+    // Simple map of food recommendations
     const foodMap = {
         vitA: "Carrots & Sweet Potatoes", vitB1: "Sunflower Seeds & Pork", vitB6: "Chickpeas & Tuna",
         vitB9: "Leafy Greens & Folate", vitB12: "Beef & Nutritional Yeast", vitC: "Bell Peppers & Citrus",
@@ -136,17 +152,29 @@ function renderNutrition() {
     };
 
     listContainer.innerHTML = "";
+    
     if (needs.length === 0) {
-        listContainer.innerHTML = "<p>Your levels are optimal! Keep eating a variety of whole foods.</p>";
+        // If they haven't taken the test yet or are perfectly healthy
+        listContainer.innerHTML = `
+            <div style="width:100%; text-align:center;">
+                <p>No deficiencies detected or no data entered yet.</p>
+                <a href="bloodtest.html" class="btn-outline">Go to Bloodtest</a>
+            </div>`;
         return;
     }
 
     needs.forEach(need => {
         const nutrientTitle = healthLibrary[need].name; 
         const foodName = foodMap[need];
+        
+        // Create a nice card for each food recommendation
         listContainer.innerHTML += `
-            <div class="food-row">
-                ${foodName} <span class="nutrient-name">${nutrientTitle}</span>
+            <div class="card">
+                <h3>${nutrientTitle}</h3>
+                <p style="color:#666; font-size:0.9rem;">Recommended Foods:</p>
+                <div style="font-weight:bold; font-size:1.2rem; color:var(--accent-red); margin-top:5px;">
+                    ${foodName}
+                </div>
             </div>
         `;
     });
@@ -158,28 +186,34 @@ function renderNutrition() {
 function renderRecipes() {
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
     // Only run if on the recipes page
-    if (!document.getElementById('recipe-vitA')) return; 
+    if (!document.getElementById('recipe-grid')) return; 
 
-    if (needs.includes("vitA")) document.getElementById('recipe-vitA').style.display = "block";
-    if (needs.includes("vitB1")) document.getElementById('recipe-vitB1').style.display = "block";
-    if (needs.includes("vitB6")) document.getElementById('recipe-vitB6').style.display = "block";
-    if (needs.includes("vitB9")) document.getElementById('recipe-vitB9').style.display = "block";
-    if (needs.includes("vitB12")) document.getElementById('recipe-vitB12').style.display = "block";
-    if (needs.includes("vitC")) document.getElementById('recipe-vitC').style.display = "block";
-    if (needs.includes("vitD")) document.getElementById('recipe-vitD').style.display = "block";
-    if (needs.includes("vitE")) document.getElementById('recipe-vitE').style.display = "block";
-    if (needs.includes("vitK")) document.getElementById('recipe-vitK').style.display = "block";
-    if (needs.includes("iron")) document.getElementById('recipe-iron').style.display = "block";
-    if (needs.includes("magnesium")) document.getElementById('recipe-magnesium').style.display = "block";
-    if (needs.includes("zinc")) document.getElementById('recipe-zinc').style.display = "block";
-    if (needs.includes("calcium")) document.getElementById('recipe-calcium').style.display = "block";
-    if (needs.includes("potassium")) document.getElementById('recipe-potassium').style.display = "block";
-    if (needs.includes("selenium")) document.getElementById('recipe-selenium').style.display = "block";
-    if (needs.includes("copper")) document.getElementById('recipe-copper').style.display = "block";
-    if (needs.includes("iodine")) document.getElementById('recipe-iodine').style.display = "block";
-    if (needs.includes("manganese")) document.getElementById('recipe-manganese').style.display = "block";
-    if (needs.includes("phosphorus")) document.getElementById('recipe-phosphorus').style.display = "block";
-    if (needs.includes("sodium")) document.getElementById('recipe-sodium').style.display = "block";
+    // Helper to show element by ID
+    const show = (id) => {
+        const el = document.getElementById(id);
+        if(el) el.style.display = "block";
+    };
+
+    if (needs.includes("vitA")) show('recipe-vitA');
+    if (needs.includes("vitB1")) show('recipe-vitB1');
+    if (needs.includes("vitB6")) show('recipe-vitB6');
+    if (needs.includes("vitB9")) show('recipe-vitB9');
+    if (needs.includes("vitB12")) show('recipe-vitB12');
+    if (needs.includes("vitC")) show('recipe-vitC');
+    if (needs.includes("vitD")) show('recipe-vitD');
+    if (needs.includes("vitE")) show('recipe-vitE');
+    if (needs.includes("vitK")) show('recipe-vitK');
+    if (needs.includes("iron")) show('recipe-iron');
+    if (needs.includes("magnesium")) show('recipe-magnesium');
+    if (needs.includes("zinc")) show('recipe-zinc');
+    if (needs.includes("calcium")) show('recipe-calcium');
+    if (needs.includes("potassium")) show('recipe-potassium');
+    if (needs.includes("selenium")) show('recipe-selenium');
+    if (needs.includes("copper")) show('recipe-copper');
+    if (needs.includes("iodine")) show('recipe-iodine');
+    if (needs.includes("manganese")) show('recipe-manganese');
+    if (needs.includes("phosphorus")) show('recipe-phosphorus');
+    if (needs.includes("sodium")) show('recipe-sodium');
 
     // Show the "optimal" message if the needs list is empty
     const msg = document.getElementById('no-recipes-msg');
@@ -190,10 +224,14 @@ function renderRecipes() {
    7. INITIALIZATION
    ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
-    const analyzeBtn = document.getElementById('analyze-btn');
-    if (analyzeBtn) {
-        analyzeBtn.addEventListener('click', runAnalysis);
+    
+    // CONNECT THE FORM SUBMISSION
+    const form = document.getElementById('healthForm');
+    if (form) {
+        form.addEventListener('submit', runAnalysis);
     }
+
+    // Run page specific renderers
     renderDashboard();
     renderNutrition();
     renderRecipes();
