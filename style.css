@@ -1,5 +1,5 @@
 /* =========================================
-   1. VARIABLES (The Control Panel) 
+   1. VARIABLES 
    ========================================= */
 :root {
     --primary-green: #E6F0E4;
@@ -11,13 +11,9 @@
 }
 
 /* =========================================
-   2. RESET & BASE (Sticky Footer Engine)
+   2. RESET & BASE 
    ========================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background-color: var(--primary-green);
@@ -26,11 +22,11 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Forces footer to bottom of screen */
+    min-height: 100vh; 
 }
 
 /* =========================================
-   3. LAYOUT (Desktop Centering)
+   3. LAYOUT 
    ========================================= */
 .container { 
     max-width: 1100px; 
@@ -39,33 +35,15 @@ body {
     padding: 0 20px; 
     flex: 1; 
 }
-
 section { padding: 40px 0; }
 .text-center { text-align: center; }
 
 /* =========================================
-   4. NAVIGATION (Desktop Row)
+   4. NAVIGATION 
    ========================================= */
-nav { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    padding: 20px 0; 
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 30px; /* Space between links */
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--dark-text);
-    font-weight: 600;
-    transition: color 0.3s;
-}
-
+nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+nav ul { display: flex; list-style: none; gap: 30px; }
+nav ul li a { text-decoration: none; color: var(--dark-text); font-weight: 600; transition: color 0.3s; }
 nav ul li a:hover { color: var(--accent-red); }
 
 /* =========================================
@@ -79,79 +57,49 @@ p { margin-bottom: 15px; }
    6. BUTTONS 
    ========================================= */
 .btn-main { 
-    background: var(--accent-red); 
-    color: var(--white); 
-    border: none; 
-    padding: 12px 24px; 
-    border-radius: 4px; 
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer; 
-    transition: transform 0.2s, background 0.2s;
-    display: block; width: fit-content; margin: 30px auto;    
+    background: var(--accent-red); color: var(--white); border: none; padding: 12px 24px; 
+    border-radius: 4px; font-weight: bold; text-transform: uppercase; cursor: pointer; 
+    transition: transform 0.2s, background 0.2s; display: block; width: fit-content; margin: 30px auto;    
 }
-
 .btn-main:hover { background: #8a2e2e; transform: translateY(-2px); }
-
 .btn-outline {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 15px;
-    border: 1px solid var(--accent-red);
-    color: var(--accent-red);
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    display: inline-block; margin-top: 10px; padding: 5px 15px; border: 1px solid var(--accent-red);
+    color: var(--accent-red); text-decoration: none; border-radius: 4px; font-size: 0.8rem; font-weight: bold;
 }
 
 /* =========================================
-   7. CARDS & GRID (Recipe Page)
+   7. CARDS (RECIPES ONLY)
    ========================================= */
-.recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 25px;
-    margin-top: 10px;
-    padding-bottom: 50px;
-}
-
-/* Card Styling - Fixed Width for Uniformity */
+/* These white boxes are ONLY for recipes/results, NOT the timeline */
+.recipe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 10px; padding-bottom: 50px; }
 .card { 
-    background: var(--white); 
-    border-radius: 8px; 
-    padding: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-    width: 320px;       
-    min-height: 250px;  
-    margin: 10px auto; 
+    background: var(--white); border-radius: 8px; padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); width: 320px; min-height: 250px; margin: 10px auto; 
 }
-
-/* Status Borders */
 .card.status-low { border-left: 10px solid var(--accent-red); border-top: none; }
 .card.status-optimal { border-left: 10px solid #5CB85C; border-top: none; }
 .card.status-high { border-left: 10px solid #F0AD4E; border-top: none; }
 
 /* =========================================
-   8. DASHBOARD LAYOUTS (Results & Nutrition)
+   8. PROGRESS BAR (FIXED!)
    ========================================= */
-#results-dashboard, #nutrition-container {
-    display: flex;         
-    flex-wrap: wrap;       
-    gap: 20px;             
-    justify-content: center; /* Centers items in the middle of screen */
-    margin-top: 20px;
-    width: 100%;
+/* This fixes the "weird list" on the Bloodtest page */
+.progress-wrapper { padding: 20px 0; }
+.progress-steps { display: flex; justify-content: space-between; position: relative; max-width: 800px; margin: 0 auto; }
+.progress-line { position: absolute; top: 20px; left: 0; width: 100%; height: 2px; background-color: var(--gray-border); z-index: 0; }
+.step {
+    position: relative; z-index: 1; width: 40px; height: 40px; background-color: var(--white);
+    border: 2px solid var(--gray-border); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: bold; color: var(--gray-border);
 }
+.step.active { border-color: var(--accent-red); background-color: var(--accent-red); color: var(--white); }
+.step-label { position: absolute; top: 50px; white-space: nowrap; font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
 /* =========================================
-   9. MEDICAL FORM
+   9. DASHBOARDS & FORMS
    ========================================= */
-.medical-form {
-    padding: 0; overflow: hidden;
-    border: 1px solid var(--gray-border);
-    max-width: 600px; margin: 0 auto; /* Centers the form */
-}
+#results-dashboard, #nutrition-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px; width: 100%; }
+.medical-form { padding: 0; overflow: hidden; border: 1px solid var(--gray-border); max-width: 600px; margin: 0 auto; }
 .card-header { background-color: var(--dark-text); color: var(--white); padding: 15px 25px; }
 .form-group { padding: 0 25px 20px 25px; display: flex; flex-direction: column; gap: 8px; }
 .input-wrapper { position: relative; display: flex; align-items: center; }
@@ -159,7 +107,7 @@ p { margin-bottom: 15px; }
 .form-footer { padding: 15px 25px; background-color: #f8fcf8; border-top: 1px solid #eee; text-align: center; }
 
 /* =========================================
-   10. TIMELINE (How It Works)
+   10. TIMELINE (TRANSPARENT STYLE)
    ========================================= */
 .timeline { position: relative; max-width: 1000px; margin: 40px auto; padding: 20px 0; }
 .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--accent-red); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
@@ -170,12 +118,12 @@ p { margin-bottom: 15px; }
 .phase-label { display: block; color: var(--accent-red); font-weight: bold; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
 
 /* =========================================
-   11. NEW INDEX PAGE STYLES (Science/FAQ)
+   11. SCIENCE & FAQ (TRANSPARENT STYLE)
    ========================================= */
 .hero-line { width: 100%; max-width: 800px; height: 1px; background-color: var(--dark-text); margin: 40px auto; opacity: 0.2; }
 
-/* Science Section - Desktop Flexbox (Side by Side) */
-.science-section { background-color: var(--white); padding: 60px 0; margin-top: 40px; border-radius: 12px; }
+/* Science Section - Removed white background */
+.science-section { background-color: transparent; padding: 60px 0; margin-top: 40px; }
 .science-grid { display: flex; align-items: center; gap: 50px; margin-top: 40px; }
 .science-text, .science-img-container { flex: 1; }
 .science-img-container img { width: 100%; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
@@ -183,8 +131,8 @@ p { margin-bottom: 15px; }
 .science-list li { margin-bottom: 25px; display: flex; gap: 15px; }
 .science-number { font-size: 2rem; font-weight: bold; color: var(--dark-text); opacity: 0.8; line-height: 1; }
 
-/* FAQ Dropdowns */
-details { background-color: var(--white); margin-bottom: 15px; border-bottom: 1px solid var(--gray-border); padding: 15px 0; cursor: pointer; }
+/* FAQ Dropdowns - Transparent */
+details { background-color: transparent; margin-bottom: 15px; border-bottom: 1px solid var(--gray-border); padding: 15px 0; cursor: pointer; }
 summary { font-weight: bold; color: var(--dark-text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
 summary::after { content: 'v'; color: #5CB85C; font-weight: bold; transform: scaleX(1.5) scaleY(0.8); }
 details[open] summary::after { transform: rotate(180deg) scaleX(1.5) scaleY(0.8); }
@@ -197,7 +145,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
 
 /* =========================================
    13. MOBILE RESPONSIVE ENGINE
-   (Kept here safely so phone view works later, but ignored by desktop)
    ========================================= */
 @media screen and (max-width: 768px) {
     .container { width: 100% !important; padding: 0 20px !important; }
