@@ -173,3 +173,35 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     border-radius: 6px;  /* Rounds the corners */
     margin-bottom: 15px;
 }
+/* =========================================
+   15. NUTRITION GROCERY LIST
+   ========================================= */
+#food-list-display {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.food-row {
+    background: var(--white);
+    padding: 18px 25px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.nutrient-name {
+    background: var(--accent-red);
+    color: var(--white);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
