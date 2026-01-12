@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DayLab | Enter Data</title>
-    <link rel="stylesheet" href="style.css?v=7">
+    <title>DayLab | Personal Health</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="container">
         <nav>
-            <a href="index.html" style="display: flex; align-items: center; text-decoration: none; border: none;">
-                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;" loading="lazy">
+            <a href="index.html" style="display: block; border: none; text-decoration: none;">
+                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;">
             </a>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="bloodtest.html" style="color: var(--accent-red);">Bloodtest</a></li>
+                <li><a href="bloodtest.html">Bloodtest</a></li>
                 <li><a href="results.html">Results</a></li>
                 <li><a href="nutrition.html">Recommended Food</a></li>
                 <li><a href="recipes.html">Healthy Recipes</a></li>
@@ -24,10 +24,9 @@
     </header>
 
     <main class="container">
-        
         <div class="progress-wrapper container">
             <div class="progress-steps">
-                <div class="step active">1 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Bloodtest</span></div>
+                <div class="step active">1 <span class="step-label">Bloodtest</span></div>
                 <div class="step">2 <span class="step-label">Results</span></div>
                 <div class="step">3 <span class="step-label">Nutrition</span></div>
                 <div class="step">4 <span class="step-label">Recipes</span></div>
@@ -35,136 +34,60 @@
             </div>
         </div>
 
-        <section class="text-center">
+        <section class="text-center" style="margin-bottom: 40px;">
             <h1 style="color: var(--accent-red);">Laboratory Data Entry</h1>
             <p>Enter your results precisely as they appear on your medical report.</p>
         </section>
-
-        <div class="medical-form card">
-            <div class="card-header">
-                <h3>Digital Lab Entry</h3>
-            </div>
-            
-            <form id="healthForm">
-                
+    
+        <section style="max-width: 550px; margin: 0 auto; padding-bottom: 100px;">
+            <div class="card medical-form">
+                <div class="card-header">
+                    <h3>Digital Lab Entry</h3>
+                </div>
+    
                 <div style="padding: 20px 25px 10px; font-weight: bold; color: var(--accent-red); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
                     Vitamins
                 </div>
-
-                <div class="form-group">
-                    <label for="vitA">Vitamin A</label>
-                    <div class="input-wrapper"><input type="number" id="vitA" step="0.01" placeholder="0.00"><span class="unit">µg/dL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitB1">Vitamin B1</label>
-                    <div class="input-wrapper"><input type="number" id="vitB1" step="0.01" placeholder="0.00"><span class="unit">nmol/L</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitB6">Vitamin B6</label>
-                    <div class="input-wrapper"><input type="number" id="vitB6" step="0.01" placeholder="0.00"><span class="unit">µg/L</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitB9">Folate (B9)</label>
-                    <div class="input-wrapper"><input type="number" id="vitB9" step="0.01" placeholder="0.00"><span class="unit">ng/mL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitB12">Vitamin B12</label>
-                    <div class="input-wrapper"><input type="number" id="vitB12" step="0.01" placeholder="0.00"><span class="unit">pg/mL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitC">Vitamin C</label>
-                    <div class="input-wrapper"><input type="number" id="vitC" step="0.01" placeholder="0.00"><span class="unit">mg/dL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitD">Vitamin D</label>
-                    <div class="input-wrapper"><input type="number" id="vitD" step="0.01" placeholder="0.00"><span class="unit">ng/mL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitE">Vitamin E</label>
-                    <div class="input-wrapper"><input type="number" id="vitE" step="0.01" placeholder="0.00"><span class="unit">mg/L</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="vitK">Vitamin K</label>
-                    <div class="input-wrapper"><input type="number" id="vitK" step="0.01" placeholder="0.00"><span class="unit">nmol/L</span></div>
-                </div>
-
+                
+                <div class="form-group"><label>Vitamin A</label><div class="input-wrapper"><input type="number" id="vitA-input" placeholder="0.0"><span class="unit">µg/dL</span></div></div>
+                <div class="form-group"><label>Vitamin B1</label><div class="input-wrapper"><input type="number" id="vitB1-input" placeholder="0.0"><span class="unit">nmol/L</span></div></div>
+                <div class="form-group"><label>Vitamin B6</label><div class="input-wrapper"><input type="number" id="vitB6-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
+                <div class="form-group"><label>Folate (B9)</label><div class="input-wrapper"><input type="number" id="vitB9-input" placeholder="0.0"><span class="unit">ng/mL</span></div></div>
+                <div class="form-group"><label>Vitamin B12</label><div class="input-wrapper"><input type="number" id="vitB12-input" placeholder="0.0"><span class="unit">pg/mL</span></div></div>
+                <div class="form-group"><label>Vitamin C</label><div class="input-wrapper"><input type="number" id="vitC-input" placeholder="0.0"><span class="unit">mg/dL</span></div></div>
+                <div class="form-group"><label>Vitamin D</label><div class="input-wrapper"><input type="number" id="vitD-input" placeholder="0.0"><span class="unit">ng/mL</span></div></div>
+                <div class="form-group"><label>Vitamin E</label><div class="input-wrapper"><input type="number" id="vitE-input" placeholder="0.0"><span class="unit">mg/L</span></div></div>
+                <div class="form-group"><label>Vitamin K</label><div class="input-wrapper"><input type="number" id="vitK-input" placeholder="0.0"><span class="unit">nmol/L</span></div></div>
+    
                 <div style="padding: 30px 25px 10px; font-weight: bold; color: var(--accent-red); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">
                     Minerals & Trace Elements
                 </div>
-
-                <div class="form-group">
-                    <label for="iron">Iron (Ferritin)</label>
-                    <div class="input-wrapper"><input type="number" id="iron" step="0.01" placeholder="0.00"><span class="unit">ng/mL</span></div>
+    
+                <div class="form-group"><label>Iron (Ferritin)</label><div class="input-wrapper"><input type="number" id="iron-input" placeholder="0.0"><span class="unit">ng/mL</span></div></div>
+                <div class="form-group"><label>Magnesium</label><div class="input-wrapper"><input type="number" id="magnesium-input" placeholder="0.0"><span class="unit">mg/dL</span></div></div>
+                <div class="form-group"><label>Zinc</label><div class="input-wrapper"><input type="number" id="zinc-input" placeholder="0.0"><span class="unit">µg/dL</span></div></div>
+                <div class="form-group"><label>Calcium</label><div class="input-wrapper"><input type="number" id="calcium-input" placeholder="0.0"><span class="unit">mg/dL</span></div></div>
+                <div class="form-group"><label>Potassium</label><div class="input-wrapper"><input type="number" id="potassium-input" placeholder="0.0"><span class="unit">mmol/L</span></div></div>
+                <div class="form-group"><label>Selenium</label><div class="input-wrapper"><input type="number" id="selenium-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
+                <div class="form-group"><label>Copper</label><div class="input-wrapper"><input type="number" id="copper-input" placeholder="0.0"><span class="unit">µg/dL</span></div></div>
+                <div class="form-group"><label>Iodine</label><div class="input-wrapper"><input type="number" id="iodine-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
+                <div class="form-group"><label>Manganese</label><div class="input-wrapper"><input type="number" id="manganese-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
+                <div class="form-group"><label>Phosphorus</label><div class="input-wrapper"><input type="number" id="phosphorus-input" placeholder="0.0"><span class="unit">mg/dL</span></div></div>
+                <div class="form-group"><label>Sodium</label><div class="input-wrapper"><input type="number" id="sodium-input" placeholder="0.0"><span class="unit">mmol/L</span></div></div>
+    
+                <div style="padding: 25px;">
+                    <button id="analyze-btn" class="btn-main" style="width: 100%;">View Results</button>
                 </div>
-
-                <div class="form-group">
-                    <label for="magnesium">Magnesium</label>
-                    <div class="input-wrapper"><input type="number" id="magnesium" step="0.01" placeholder="0.00"><span class="unit">mg/dL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="zinc">Zinc</label>
-                    <div class="input-wrapper"><input type="number" id="zinc" step="0.01" placeholder="0.00"><span class="unit">µg/dL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="calcium">Calcium</label>
-                    <div class="input-wrapper"><input type="number" id="calcium" step="0.01" placeholder="0.00"><span class="unit">mg/dL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="potassium">Potassium</label>
-                    <div class="input-wrapper"><input type="number" id="potassium" step="0.01" placeholder="0.00"><span class="unit">mmol/L</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="selenium">Selenium</label>
-                    <div class="input-wrapper"><input type="number" id="selenium" step="0.01" placeholder="0.00"><span class="unit">µg/L</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="copper">Copper</label>
-                    <div class="input-wrapper"><input type="number" id="copper" step="0.01" placeholder="0.00"><span class="unit">µg/dL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="iodine">Iodine</label>
-                    <div class="input-wrapper"><input type="number" id="iodine" step="0.01" placeholder="0.00"><span class="unit">µg/L</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="manganese">Manganese</label>
-                    <div class="input-wrapper"><input type="number" id="manganese" step="0.01" placeholder="0.00"><span class="unit">µg/L</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="phosphorus">Phosphorus</label>
-                    <div class="input-wrapper"><input type="number" id="phosphorus" step="0.01" placeholder="0.00"><span class="unit">mg/dL</span></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="sodium">Sodium</label>
-                    <div class="input-wrapper"><input type="number" id="sodium" step="0.01" placeholder="0.00"><span class="unit">mmol/L</span></div>
-                </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="btn-main" style="width: 100%; margin: 0;">Analyze Results</button>
-                    <small style="display:block; margin-top:10px; color:#888;">All 20 biomarkers are compared against standard clinical ranges.</small>
-                </div>
-            </form>
-        </div>
+                
+                <p class="form-footer">
+                    <small>All 20 biomarkers are compared against standard clinical ranges.</small>
+                </p>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 DAYLAB – All rights reserved.</p>
+    <footer class="text-center">
+        <p>&copy; 2025 DayLab Project</p>
     </footer>
 
     <script src="script.js"></script>
