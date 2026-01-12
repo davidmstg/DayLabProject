@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DayLab | Personal Health Analysis</title>
+    <title>DayLab | Personalized Health</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="container">
         <nav>
-            <a href="index.html" style="display: block; border: none; text-decoration: none;">
-                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;">
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none; border: none;">
+                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;" loading="lazy">
             </a>
-            
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" style="color: var(--accent-red);">Home</a></li>
                 <li><a href="bloodtest.html">Bloodtest</a></li>
                 <li><a href="results.html">Results</a></li>
                 <li><a href="nutrition.html">Recommended Food</a></li>
@@ -25,55 +24,110 @@
     </header>
 
     <main class="container">
-        <section class="text-center">
-            <h1>Understand your body.<br>Feed it right.</h1>
-            <p>Enter your blood results and get a personalized nutrition plan today.</p>
+        
+        <section class="text-center" style="padding-top: 60px;">
+            <h1 style="font-size: 3rem; margin-bottom: 10px;">Understand your body.<br>Feed it right.</h1>
+            <p style="font-size: 1.1rem; color: #555;">Enter your blood results and get a personalized nutrition plan today.</p>
+            <div class="hero-line"></div>
         </section>
 
-        <hr> 
-
-        <section class="how-it-works">
-            <h2 class="text-center">How it works</h2>
+        <section>
+            <h2 class="text-center" style="margin-bottom: 40px; color: var(--dark-text);">How it works</h2>
             
             <div class="timeline">
                 <div class="timeline-item left">
                     <div class="timeline-dot"></div>
-                    <div class="card">
-                        <span class="phase-label">Phase 1</span>
-                        <h3>Input Your Data</h3>
-                        <p>Enter your lab data into our secure portal to begin your health journey.</p>
-                        <a href="bloodtest.html" class="btn-outline">Go to Form</a>
-                    </div>
+                    <span class="phase-label">Phase 1</span>
+                    <h3>Input Your Data</h3>
+                    <p>Enter your lab data into our secure portal to begin your health journey.</p>
+                    <a href="bloodtest.html" class="btn-outline">Go to Form</a>
                 </div>
-        
+
                 <div class="timeline-item right">
                     <div class="timeline-dot"></div>
-                    <div class="card">
-                        <span class="phase-label">Phase 2</span>
-                        <h3>Smart Analysis</h3>
-                        <p>We identify your specific vitamin deficiencies based on medical thresholds.</p>
-                    </div>
+                    <span class="phase-label">Phase 2</span>
+                    <h3>Smart Analysis</h3>
+                    <p>We identify your specific vitamin deficiencies based on medical thresholds.</p>
                 </div>
-        
+
                 <div class="timeline-item left">
                     <div class="timeline-dot"></div>
-                    <div class="card">
-                        <span class="phase-label">Phase 3</span>
-                        <h3>Eat & Recover</h3>
-                        <p>Get recipes tailored to your body's needs and start feeling better.</p>
-                    </div>
+                    <span class="phase-label">Phase 3</span>
+                    <h3>Eat & Recover</h3>
+                    <p>Get recipes tailored to your body's needs and start feeling better.</p>
                 </div>
             </div>
         </section>
-        <section class="text-center">
-            <a href="bloodtest.html" class="btn-main">Start Analysis</a>
+
+        <section class="science-section">
+            <div class="text-center">
+                <h2 style="margin-bottom: 10px;">Why It Matters</h2>
+                <p style="max-width: 700px; margin: 0 auto; font-size: 0.9rem;">Your blood values are the roadmap to your body's needs. Too many people take supplements or follow diets without knowing what their body truly requires.</p>
+            </div>
+
+            <div class="science-grid container">
+                <div class="science-text">
+                    <h2 style="color: #4A8B4A; margin-bottom: 20px;">Science backed</h2>
+                    <ul class="science-list">
+                        <li>
+                            <span class="science-number">1</span>
+                            <div>
+                                <strong>BACKED</strong><br>
+                                <span style="font-size: 0.9rem; color: #666;">Backed by nutrition science</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="science-number">2</span>
+                            <div>
+                                <strong>EVIDENCE</strong><br>
+                                <span style="font-size: 0.9rem; color: #666;">Evidence-based explanations</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="science-number">3</span>
+                            <div>
+                                <strong>TRUSTWORTHY</strong><br>
+                                <span style="font-size: 0.9rem; color: #666;">Built with medical advisors</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="science-img-container">
+                    <img src="pics/science-tubes.png" alt="Medical Science" loading="lazy">
+                </div>
+            </div>
         </section>
+
+        <section style="max-width: 700px; margin: 40px auto;">
+            <h2 class="text-center" style="margin-bottom: 30px; color: #4A8B4A;">Frequently Asked Questions</h2>
+            
+            <details>
+                <summary>Do I need to upload my blood test?</summary>
+                <p>No, you simply type the numbers into our secure form. We do not store files or PDFs.</p>
+            </details>
+
+            <details>
+                <summary>Is my data stored safely?</summary>
+                <p>Yes. Your data is processed locally in your browser session and is not shared with third parties.</p>
+            </details>
+
+            <details>
+                <summary>Do I get real recipes?</summary>
+                <p>Absolutely. We provide links to trusted, full recipes that specifically target the vitamins you are missing.</p>
+            </details>
+        </section>
+
+        <section class="text-center" style="margin-bottom: 80px;">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">Start your DAYLAB journey today.</h2>
+            <p>No more guessing what your body needs. Let your blood guide you.</p>
+            <a href="bloodtest.html" class="btn-main">Start your free analysis</a>
+        </section>
+
     </main>
 
-    <footer class="text-center">
+    <footer>
         <p>&copy; 2025 DAYLAB – All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
