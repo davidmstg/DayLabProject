@@ -210,15 +210,17 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
    ========================================= */
 .grocery-note {
     background: var(--white);
-    max-width: 450px;      /* Slightly narrower for the note look */
-    margin: 50px auto;     /* Centers it horizontally */
+    max-width: 450px;
+    margin: 50px auto;
     padding: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Adjusted shadow for a straight look */
     
-    /* Physical Paper Effects */
-    box-shadow: 5px 10px 20px rgba(0,0,0,0.05); /* Soft shadow */
-    transform: rotate(-1.5deg);                /* The "stuck on" tilt */
-    border-top: 15px solid rgba(0,0,0,0.03);    /* Looks like a notepad binding */
+    /* REMOVE OR COMMENT OUT THIS LINE BELOW */
+    /* transform: rotate(-1.5deg); */ 
+    
+    border-top: 15px solid rgba(0,0,0,0.03);
     position: relative;
+    border-radius: 8px; /* Optional: adds slightly softer corners */
 }
 
 /* Optional: Add a "tape" effect at the top */
