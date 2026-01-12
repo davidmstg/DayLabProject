@@ -468,3 +468,101 @@ footer {
         width: 100% !important;
     }
 }
+/* =========================================
+   14. NEW LANDING PAGE STYLES (Science & FAQ)
+   ========================================= */
+
+/* The Separator Line in the Hero */
+.hero-line {
+    width: 100%;
+    max-width: 800px;
+    height: 1px;
+    background-color: var(--dark-text);
+    margin: 40px auto;
+    opacity: 0.2;
+}
+
+/* Science Section (Text Left, Image Right) */
+.science-section {
+    background-color: var(--white);
+    padding: 60px 0;
+    margin-top: 40px;
+    border-radius: 12px; /* Optional: rounds the corners of the white box */
+}
+
+.science-grid {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.science-text { flex: 1; }
+.science-img-container { flex: 1; }
+
+.science-img-container img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.science-list {
+    list-style: none;
+    margin-top: 30px;
+}
+
+.science-list li {
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.science-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dark-text);
+    opacity: 0.8;
+    line-height: 1;
+}
+
+/* FAQ Dropdowns (The Accordion) */
+details {
+    background-color: var(--white);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--gray-border);
+    padding: 15px 0;
+    cursor: pointer;
+}
+
+summary {
+    font-weight: bold;
+    color: var(--dark-text);
+    list-style: none; /* Hides default triangle */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Custom green arrow for the FAQ */
+summary::after {
+    content: 'v'; /* Simple arrow icon */
+    color: #5CB85C;
+    font-weight: bold;
+    transform: scaleX(1.5) scaleY(0.8); /* Flattens the v slightly */
+}
+
+details[open] summary::after {
+    transform: rotate(180deg) scaleX(1.5) scaleY(0.8);
+}
+
+details p {
+    margin-top: 10px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Mobile Fix for Science Section */
+@media screen and (max-width: 768px) {
+    .science-grid { flex-direction: column; }
+    .science-img-container { order: -1; /* Puts image on top */ }
+}
