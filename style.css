@@ -68,23 +68,22 @@ p { margin-bottom: 15px; }
 }
 
 /* =========================================
-   7. CARDS (RECIPES ONLY)
+   7. CARDS (RECIPES & RESULTS)
    ========================================= */
-/* These white boxes are ONLY for recipes/results, NOT the timeline */
 .recipe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 10px; padding-bottom: 50px; }
 .card { 
     background: var(--white); border-radius: 8px; padding: 20px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.05); width: 320px; min-height: 250px; margin: 10px auto; 
 }
+/* Status Bars */
 .card.status-low { border-left: 10px solid var(--accent-red); border-top: none; }
 .card.status-optimal { border-left: 10px solid #5CB85C; border-top: none; }
 .card.status-high { border-left: 10px solid #F0AD4E; border-top: none; }
 
 /* =========================================
-   8. PROGRESS BAR (FIXED!)
+   8. PROGRESS BAR (Fixes "Text on Left" Issue)
    ========================================= */
-/* This fixes the "weird list" on the Bloodtest page */
-.progress-wrapper { padding: 20px 0; }
+.progress-wrapper { padding: 20px 0; width: 100%; }
 .progress-steps { display: flex; justify-content: space-between; position: relative; max-width: 800px; margin: 0 auto; }
 .progress-line { position: absolute; top: 20px; left: 0; width: 100%; height: 2px; background-color: var(--gray-border); z-index: 0; }
 .step {
@@ -109,9 +108,14 @@ p { margin-bottom: 15px; }
 /* =========================================
    10. TIMELINE (TRANSPARENT STYLE)
    ========================================= */
+/* This ensures timeline items have NO white background */
 .timeline { position: relative; max-width: 1000px; margin: 40px auto; padding: 20px 0; }
 .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--accent-red); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
 .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
+
+/* If you accidentally used .card in timeline, this forces it transparent */
+.timeline-item .card { background: transparent !important; box-shadow: none !important; border: none !important; width: 100% !important; padding: 0 !important; }
+
 .timeline-dot { position: absolute; width: 20px; height: 20px; background-color: var(--white); border: 4px solid var(--accent-red); top: 40px; border-radius: 50%; z-index: 1; }
 .timeline-item.left { left: 0; text-align: right; } .timeline-item.left .timeline-dot { right: -10px; }
 .timeline-item.right { left: 50%; text-align: left; } .timeline-item.right .timeline-dot { left: -10px; }
@@ -122,7 +126,7 @@ p { margin-bottom: 15px; }
    ========================================= */
 .hero-line { width: 100%; max-width: 800px; height: 1px; background-color: var(--dark-text); margin: 40px auto; opacity: 0.2; }
 
-/* Science Section - Removed white background */
+/* Science Section */
 .science-section { background-color: transparent; padding: 60px 0; margin-top: 40px; }
 .science-grid { display: flex; align-items: center; gap: 50px; margin-top: 40px; }
 .science-text, .science-img-container { flex: 1; }
@@ -131,7 +135,7 @@ p { margin-bottom: 15px; }
 .science-list li { margin-bottom: 25px; display: flex; gap: 15px; }
 .science-number { font-size: 2rem; font-weight: bold; color: var(--dark-text); opacity: 0.8; line-height: 1; }
 
-/* FAQ Dropdowns - Transparent */
+/* FAQ Dropdowns */
 details { background-color: transparent; margin-bottom: 15px; border-bottom: 1px solid var(--gray-border); padding: 15px 0; cursor: pointer; }
 summary { font-weight: bold; color: var(--dark-text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
 summary::after { content: 'v'; color: #5CB85C; font-weight: bold; transform: scaleX(1.5) scaleY(0.8); }
