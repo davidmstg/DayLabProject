@@ -166,10 +166,23 @@ function renderRecipes() {
  ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
     const analyzeBtn = document.getElementById('analyze-btn');
+    
+    // Fix: Ensure the click event triggers the function correctly
     if (analyzeBtn) {
-        analyzeBtn.addEventListener('click', runAnalysis);
+        analyzeBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevents the page from just refreshing
+            runAnalysis();
+        });
     }
-    renderDashboard();
-    renderNutrition();
-    renderRecipes();
+
+    // These run automatically when the correct page loads
+    if (document.getElementById('results-dashboard')) {
+        renderDashboard();
+    }
+    if (document.getElementById('food-list-display')) {
+        renderNutrition();
+    }
+    if (document.getElementById('recipe-vitA')) {
+        renderRecipes();
+    }
 });
