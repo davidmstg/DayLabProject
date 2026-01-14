@@ -10,8 +10,8 @@
 
     <header class="container">
         <nav>
-            <a href="index.html" style="display: flex; align-items: center; text-decoration: none; border: none;">
-                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;" loading="lazy">
+            <a href="index.html" style="display: block; border: none; text-decoration: none;">
+                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;">
             </a>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -25,28 +25,21 @@
     </header>
 
     <main class="container">
-        <div class="progress-wrapper container">
-            <div class="progress-steps">
-                <div class="step">1 <span class="step-label">Bloodtest</span></div>
-                <div class="step active">2 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Results</span></div>
-                <div class="step">3 <span class="step-label">Nutrition</span></div>
-                <div class="step">4 <span class="step-label">Recipes</span></div>
-                <div class="progress-line"></div>
-            </div>
-        </div>
-
-        <section class="text-center">
-            <h1>Your Health Analysis</h1>
-            <p>Based on the data you entered, here is where you stand.</p>
+        <section class="text-center" style="padding-top: 100px; padding-bottom: 0; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('results.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 40px;">
+            <h1 style="color: white; margin-bottom: 10px;">Your Health Analysis</h1>
+            <p style="color: white; margin-bottom: 30px;">Based on the data you entered, here is where you stand.</p>
+            <div class="hero-line" style="background-color: white; opacity: 0.5; margin-bottom: 0; margin-left: auto; margin-right: auto;"></div>
         </section>
 
-        <div id="results-dashboard">
-            <p style="color: #666; font-style: italic;">No data found. Please go to <a href="bloodtest.html" style="color: var(--accent-red);">Bloodtest</a> and enter your values first.</p>
+    <div class="progress-wrapper container" style="margin-bottom: 40px;">
+        <div class="progress-steps">
+            <div class="step">1 <span class="step-label">Bloodtest</span></div>
+            <div class="step active">2 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Results</span></div>
+            <div class="step">3 <span class="step-label">Nutrition</span></div>
+            <div class="step">4 <span class="step-label">Recipes</span></div>
+            <div class="progress-line"></div>
         </div>
-
-        <div class="text-center" style="margin-top: 40px;">
-            <a href="nutrition.html" class="btn-main">See Recommended Foods</a>
-        </div>
+    </div>
     </main>
 
     <footer>

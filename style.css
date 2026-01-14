@@ -220,11 +220,11 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
 }
 
 .about-hero h1 {
-    color: var(--white);
+    color: #FFFFFF;
     font-size: 4rem;
     margin: 0;
     letter-spacing: 3px;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .mission-intro { 

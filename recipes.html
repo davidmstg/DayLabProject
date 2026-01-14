@@ -10,8 +10,8 @@
 
     <header class="container">
         <nav>
-            <a href="index.html" style="display: flex; align-items: center; text-decoration: none; border: none;">
-                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;" loading="lazy">
+            <a href="index.html" style="display: block; border: none; text-decoration: none;">
+                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;">
             </a>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -25,20 +25,21 @@
     </header>
 
     <main class="container">
-        <div class="progress-wrapper container">
+        <section class="text-center" style="padding-top: 100px; padding-bottom: 0; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('recipes.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 40px;">
+            <h1 style="color: white; margin-bottom: 10px;">Your Recipe Plan</h1>
+            <p style="color: white; margin-bottom: 30px;">Nutrient-dense meals designed to balance your specific levels.</p>
+            <div class="hero-line" style="background-color: white; opacity: 0.5; margin-bottom: 0; margin-left: auto; margin-right: auto;"></div>
+        </section>
+
+        <div class="progress-wrapper container" style="margin-bottom: 40px;">
             <div class="progress-steps">
                 <div class="step">1 <span class="step-label">Bloodtest</span></div>
                 <div class="step">2 <span class="step-label">Results</span></div>
                 <div class="step">3 <span class="step-label">Nutrition</span></div>
-                <div class="step active">4 <span class="step-label">Recipes</span></div>
+                <div class="step active">4 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Recipes</span></div>
                 <div class="progress-line"></div>
             </div>
         </div>
-
-        <section class="text-center" style="margin-bottom: 40px;">
-            <h1 style="color: var(--accent-red);">Your Recipe Plan</h1>
-            <p>Nutrient-dense meals designed to balance your specific levels.</p>
-        </section>
       
         <div id="recipe-grid" class="recipe-grid">
             <p id="no-recipes-msg" style="display:none; text-align:center; width:100%; font-weight:bold;">All your levels are optimal! No specific corrective recipes are needed today.</p>
