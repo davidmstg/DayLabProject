@@ -49,9 +49,9 @@ nav ul li a:hover { color: var(--accent-red); }
 /* Special Login Button for Header */
 .btn-header-login {
     background-color: var(--accent-red);
-    color: var(--white) !important; /* Force white color even if links have other styles */
+    color: var(--white) !important;
     padding: 8px 22px;
-    border-radius: 25px; /* Rounded chic style */
+    border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
     font-size: 0.9rem;
