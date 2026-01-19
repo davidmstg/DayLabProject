@@ -119,13 +119,29 @@ p { margin-bottom: 15px; }
 /* =========================================
    9. DASHBOARDS & FORMS
    ========================================= */
-/* Grid Layout System - This fixes the "weird" layout */
+/* Flex Layout System - This centers the cards perfectly */
 .dashboard-grid, .recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;             
+    flex-wrap: wrap;           
+    justify-content: center;   /* THIS centers the cards */
     gap: 30px;
     margin-top: 20px;
     width: 100%;
+}
+
+/* Ensure cards have a nice width but can shrink if needed */
+.card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    
+    flex: 0 1 350px; /* target width 350px */
+    
+    min-width: 300px; 
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Input Form Styles */
