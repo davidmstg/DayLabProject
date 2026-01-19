@@ -70,18 +70,24 @@ p { margin-bottom: 15px; }
 /* =========================================
    7. CARDS (RECIPES & RESULTS)
    ========================================= */
-.recipe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 10px; padding-bottom: 50px; }
+/* Ensure cards don't stretch weirdly - Flex behavior */
 .card { 
     background: var(--white); border-radius: 8px; padding: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); width: 320px; min-height: 250px; margin: 10px auto; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+    /* Removing fixed width to allow grid to control sizing */
+    width: 100%; 
+    min-height: 250px; 
+    display: flex;
+    flex-direction: column;
 }
+
 /* Status Bars */
 .card.status-low { border-left: 10px solid var(--accent-red); border-top: none; }
 .card.status-optimal { border-left: 10px solid #5CB85C; border-top: none; }
 .card.status-high { border-left: 10px solid #F0AD4E; border-top: none; }
 
 /* =========================================
-   8. PROGRESS BAR (Fixes "Text on Left" Issue)
+   8. PROGRESS BAR
    ========================================= */
 .progress-wrapper { padding: 20px 0; width: 100%; }
 .progress-steps { display: flex; justify-content: space-between; position: relative; max-width: 800px; margin: 0 auto; }
@@ -94,10 +100,35 @@ p { margin-bottom: 15px; }
 .step.active { border-color: var(--accent-red); background-color: var(--accent-red); color: var(--white); }
 .step-label { position: absolute; top: 50px; white-space: nowrap; font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
+/* Clickable Progress Bar Styles */
+.step-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.step-link:hover .step {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
 /* =========================================
    9. DASHBOARDS & FORMS
    ========================================= */
-#results-dashboard, #nutrition-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px; width: 100%; }
+/* Grid Layout System - This fixes the "weird" layout */
+.dashboard-grid, .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Input Form Styles */
 .medical-form { padding: 0; overflow: hidden; border: 1px solid var(--gray-border); max-width: 600px; margin: 0 auto; }
 .card-header { background-color: var(--dark-text); color: var(--white); padding: 15px 25px; }
 .form-group { padding: 0 25px 20px 25px; display: flex; flex-direction: column; gap: 8px; }
@@ -108,14 +139,10 @@ p { margin-bottom: 15px; }
 /* =========================================
    10. TIMELINE (TRANSPARENT STYLE)
    ========================================= */
-/* This ensures timeline items have NO white background */
 .timeline { position: relative; max-width: 1000px; margin: 40px auto; padding: 20px 0; }
 .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--accent-red); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
 .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
-
-/* If you accidentally used .card in timeline, this forces it transparent */
 .timeline-item .card { background: transparent !important; box-shadow: none !important; border: none !important; width: 100% !important; padding: 0 !important; }
-
 .timeline-dot { position: absolute; width: 20px; height: 20px; background-color: var(--white); border: 4px solid var(--accent-red); top: 40px; border-radius: 50%; z-index: 1; }
 .timeline-item.left { left: 0; text-align: right; } .timeline-item.left .timeline-dot { right: -10px; }
 .timeline-item.right { left: 50%; text-align: left; } .timeline-item.right .timeline-dot { left: -10px; }
@@ -125,8 +152,6 @@ p { margin-bottom: 15px; }
    11. SCIENCE & FAQ (TRANSPARENT STYLE)
    ========================================= */
 .hero-line { width: 100%; max-width: 800px; height: 1px; background-color: var(--dark-text); margin: 40px auto; opacity: 0.2; }
-
-/* Science Section */
 .science-section { background-color: transparent; padding: 60px 0; margin-top: 40px; }
 .science-grid { display: flex; align-items: center; gap: 50px; margin-top: 40px; }
 .science-text, .science-img-container { flex: 1; }
@@ -135,7 +160,6 @@ p { margin-bottom: 15px; }
 .science-list li { margin-bottom: 25px; display: flex; gap: 15px; }
 .science-number { font-size: 2rem; font-weight: bold; color: var(--dark-text); opacity: 0.8; line-height: 1; }
 
-/* FAQ Dropdowns */
 details { background-color: transparent; margin-bottom: 15px; border-bottom: 1px solid var(--gray-border); padding: 15px 0; cursor: pointer; }
 summary { font-weight: bold; color: var(--dark-text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
 summary::after { content: 'v'; color: #5CB85C; font-weight: bold; transform: scaleX(1.5) scaleY(0.8); }
@@ -148,13 +172,13 @@ details p { margin-top: 10px; color: #666; }
 footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-border); margin-top: auto; color: #888; font-size: 0.85rem; }
 
 /* =========================================
-   13. MOBILE RESPONSIVE ENGINE
+   13. MAIN MOBILE RESPONSIVE ENGINE
    ========================================= */
 @media screen and (max-width: 768px) {
     .container { width: 100% !important; padding: 0 20px !important; }
     nav { flex-direction: column; gap: 15px; }
     nav ul { flex-direction: column; gap: 10px; text-align: center; width: 100%; padding: 0; }
-    .card { width: 100% !important; max-width: 400px; margin: 10px 0 !important; }
+    .card { width: 100% !important; margin: 10px 0 !important; }
     #results-dashboard, #nutrition-container { flex-direction: column; align-items: center; }
     .science-grid { flex-direction: column; }
     .science-img-container { order: -1; }
@@ -163,6 +187,7 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     .timeline-item.right { left: 0%; }
     .timeline-dot { left: 21px; right: auto; }
 }
+
 /* =========================================
    14. IMAGE SIZE FIX (RECIPES)
    ========================================= */
@@ -173,6 +198,7 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     border-radius: 6px;  /* Rounds the corners */
     margin-bottom: 15px;
 }
+
 /* =========================================
    15. NUTRITION GROCERY LIST
    ========================================= */
@@ -181,7 +207,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     max-width: 600px;
     margin: 0 auto;
 }
-
 .food-row {
     background: var(--white);
     padding: 18px 25px;
@@ -194,7 +219,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     font-weight: 500;
     color: var(--dark-text);
 }
-
 .nutrient-name {
     background: var(--accent-red);
     color: var(--white);
@@ -209,7 +233,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
 /* =========================================
    16. ABOUT PAGE SPECIFIC STYLES
    ========================================= */
-
 .about-hero {
     padding: 120px 0;
     background-color: var(--dark-text);
@@ -218,7 +241,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     justify-content: center;
     text-align: center;
 }
-
 .about-hero h1 {
     color: var(--white);
     font-size: 2.5rem;
@@ -226,12 +248,10 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     letter-spacing: 3px;
     text-transform: none;
 }
-
 .mission-intro { 
     padding: 80px 0; 
     background-color: var(--primary-green);
 }
-
 .mission-intro h2 { 
     font-size: 2.2rem; 
     max-width: 900px; 
@@ -239,14 +259,12 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     line-height: 1.3; 
     color: var(--dark-text);
 }
-
 .mission-intro p { 
     max-width: 700px; 
     margin: 0 auto; 
     color: #555; 
     font-size: 1.1rem;
 }
-
 .team-row { padding: 80px 0; }
 .white-bg { background-color: var(--white); }
 .green-bg { background-color: var(--primary-green); }
@@ -256,7 +274,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     align-items: center; 
     gap: 60px; 
 }
-
 .split.reverse { flex-direction: row-reverse; }
 
 .team-image { flex: 1; }
@@ -278,13 +295,11 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     text-transform: uppercase; 
     letter-spacing: 1px;
 }
-
 .team-info h3 { 
     font-size: 2.2rem; 
     margin-bottom: 15px; 
     color: var(--dark-text); 
 }
-
 .team-info p { 
     margin-bottom: 30px; 
     line-height: 1.8; 
@@ -301,7 +316,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     display: inline-block;
     transition: all 0.3s ease;
 }
-
 .btn-linkedin:hover { 
     background-color: #8a2e2e; 
     transform: translateY(-2px); 
@@ -311,7 +325,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     padding: 100px 0; 
     background-color: var(--white); 
 }
-
 .contact-bar { 
     background-color: #f8fcf8; 
     padding: 40px; 
@@ -320,7 +333,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     border: 1px solid #eee;
     text-align: center;
 }
-
 .final-footer { 
     padding: 60px 0; 
     background-color: #f0f0f0; 
@@ -330,6 +342,7 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     border-top: 1px solid #ddd; 
 }
 
+/* --- MOBILE RESPONSIVE FOR ABOUT PAGE --- */
 @media screen and (max-width: 768px) {
     .split, .split.reverse { 
         flex-direction: column; 
@@ -342,23 +355,12 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     .team-image img { 
         max-width: 100%; 
     }
-/* --- Add to the bottom of style.css --- */
+} /* <--- THIS WAS THE MISSING BRACKET THAT BROKE YOUR LAYOUT! */
 
-/* Clickable Progress Bar Styles */
-.step-link {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-}
-.step-link:hover .step {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
-}
+
+/* =========================================
+   17. NEW ADDITIONS (FILTERS & GRIDS)
+   ========================================= */
 
 /* Recipe Filter Bar Styles */
 .filter-container {
@@ -398,4 +400,16 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     font-size: 0.95rem;
     margin-top: -10px;
     margin-bottom: 15px;
+}
+
+/* Make the Normal Range box look clean */
+.normal-range-box {
+    background-color: #f1f8e9; /* Light green tint */
+    border: 1px solid #c5e1a5;
+    color: #33691e;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin: 10px 0;
+    text-align: center;
 }
