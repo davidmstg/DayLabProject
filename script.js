@@ -92,10 +92,19 @@ function renderDashboard() {
 
         const status = getStatus(value, info.min, info.max);
         
+        // UPDATED: Now shows the "Normal Range" clearly
         const cardHTML = `
             <a href="nutrition.html" class="card status-${status}" style="text-decoration: none; display: block; color: inherit; cursor: pointer;">
                 <h3>${info.name}</h3>
-                <div class="score-display">${value} <small>${info.unit}</small></div>
+                
+                <div class="score-display">
+                    ${value} <small>${info.unit}</small>
+                </div>
+                
+                <p style="font-size: 0.9rem; color: #555; margin-bottom: 5px; background: #f0f0f0; padding: 5px; border-radius: 5px; display:inline-block;">
+                    Normal Range: <strong>${info.min} - ${info.max} ${info.unit}</strong>
+                </p>
+
                 <p class="status-label">Status: <strong>${status.toUpperCase()}</strong></p>
                 <hr>
                 <p class="insight-text">${status === 'low' ? info.lowInfo : (status === 'high' ? info.highInfo : info.optimalInfo)}</p>
@@ -146,13 +155,12 @@ function renderNutrition() {
 }
 
 /* =========================================
- 6. RECIPE FILTERING (UPDATED WITH DIETARY FILTERS)
+ 6. RECIPE FILTERING (WITH DIETARY CHECKBOXES)
  ========================================= */
 function renderRecipes() {
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
     const recipeGrid = document.getElementById('recipe-grid');
     
-    // Check if we are actually on the recipe page
     if (!recipeGrid) return; 
 
     // 1. Get current checkbox states
@@ -166,29 +174,21 @@ function renderRecipes() {
 
     let hasRecipes = false;
 
-    // 3. Loop through deficiencies (keys) and show matching cards
+    // 3. Loop through deficiencies and show matching cards
     const keys = ["vitA", "vitB1", "vitB6", "vitB9", "vitB12", "vitC", "vitD", "vitE", "vitK", "iron", "magnesium", "zinc", "calcium", "potassium", "selenium", "copper", "iodine", "manganese", "phosphorus", "sodium"];
     
     keys.forEach(key => {
         if (needs.includes(key)) {
-            // Find all cards for this nutrient
             const relatedCards = recipeGrid.querySelectorAll(`[id^="recipe-${key}"]`);
             
             relatedCards.forEach(card => {
                 // 4. Apply Dietary Filters
                 let matchesDiet = true;
 
-                if (isVegan && !card.classList.contains('vegan')) {
-                    matchesDiet = false;
-                }
-                if (isLactoseFree && !card.classList.contains('lactose-free')) {
-                    matchesDiet = false;
-                }
-                if (isGlutenFree && !card.classList.contains('gluten-free')) {
-                    matchesDiet = false;
-                }
+                if (isVegan && !card.classList.contains('vegan')) matchesDiet = false;
+                if (isLactoseFree && !card.classList.contains('lactose-free')) matchesDiet = false;
+                if (isGlutenFree && !card.classList.contains('gluten-free')) matchesDiet = false;
 
-                // Only show if it matches BOTH the deficiency and the diet
                 if (matchesDiet) {
                     card.style.display = "block";
                     hasRecipes = true;
