@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DayLab | Healthy Recipes</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* New Styles for the Filter Bar */
+        .filter-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .filter-label {
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+        .filter-option {
+            display: inline-block;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        /* Style for the clickable checkboxes */
+        .filter-option input {
+            transform: scale(1.2);
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        /* Nutrient text style */
+        .nutrient-stat {
+            color: #d9534f; 
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+        .step-link {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -33,154 +73,224 @@
 
         <div class="progress-wrapper container" style="margin-bottom: 40px;">
             <div class="progress-steps">
-                <div class="step">1 <span class="step-label">Bloodtest</span></div>
-                <div class="step">2 <span class="step-label">Results</span></div>
-                <div class="step">3 <span class="step-label">Nutrition</span></div>
-                <div class="step active">4 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Recipes</span></div>
+                <a href="bloodtest.html" class="step-link"><div class="step">1 <span class="step-label">Bloodtest</span></div></a>
+                <a href="results.html" class="step-link"><div class="step">2 <span class="step-label">Results</span></div></a>
+                <a href="nutrition.html" class="step-link"><div class="step">3 <span class="step-label">Nutrition</span></div></a>
+                <a href="recipes.html" class="step-link"><div class="step active">4 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Recipes</span></div></a>
                 <div class="progress-line"></div>
             </div>
         </div>
-      
+       
+        <div class="container">
+            <div class="filter-container">
+                <span class="filter-label">Dietary Preferences:</span>
+                
+                <label class="filter-option">
+                    <input type="checkbox" id="check-vegan" onchange="renderRecipes()"> Vegan
+                </label>
+                
+                <label class="filter-option">
+                    <input type="checkbox" id="check-lactose" onchange="renderRecipes()"> Lactose Free
+                </label>
+                
+                <label class="filter-option">
+                    <input type="checkbox" id="check-gluten" onchange="renderRecipes()"> Gluten Free
+                </label>
+            </div>
+        </div>
+
         <div id="recipe-grid" class="recipe-grid">
             <p id="no-recipes-msg" style="display:none; text-align:center; width:100%; font-weight:bold;">All your levels are optimal! No specific corrective recipes are needed today.</p>
 
-            <div class="card recipe-card" id="recipe-vitA" style="display:none;">
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-vitA" style="display:none;">
                 <img src="pics/potatosoup.png" alt="Soup" class="recipe-img" loading="lazy">
                 <h3>Roasted Carrot & Sweet Potato Soup</h3>
-                <p>A creamy, comforting soup packed with Beta-Carotene for Vitamin A support.</p>
+                <p>A creamy, comforting soup packed with Beta-Carotene.</p>
+                <p class="nutrient-stat">Vitamin A: 1200 mcg</p>
                 <a href="https://www.bbcgoodfood.com/recipes/roasted-sweet-potato-carrot-soup" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-vitB1" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-vitB1" style="display:none;">
                 <img src="pics/crustedpork.png" alt="Pork" class="recipe-img" loading="lazy">
                 <h3>Sunflower Seed & Herb Crusted Pork</h3>
-                <p>A protein-rich dish focusing on Thiamine (B1) for energy metabolism.</p>
+                <p>A protein-rich dish focusing on Thiamine (B1).</p>
+                <p class="nutrient-stat">Vitamin B1: 1.2 mg</p>
                 <a href="https://www.foodandwine.com/recipes/pork-chops-sunflower-seed-gremolata" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-vitB6" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-vitB6" style="display:none;">
                 <img src="pics/tuna.png" alt="Tuna Salad" class="recipe-img" loading="lazy">
                 <h3>Zesty Chickpea & Tuna Salad</h3>
-                <p>Fast, fresh, and high in B6 to support your brain and heart health.</p>
+                <p>Fast, fresh, and high in B6 for brain health.</p>
+                <p class="nutrient-stat">Vitamin B6: 1.8 mg</p>
                 <a href="https://johnwest.com.au/recipe/zesty-chick-pea-tuna-mint-mixed-leaf-salad/4183" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-vitB9" style="display:none;">
+            <div class="card recipe-card gluten-free vegetarian" id="recipe-vitB9" style="display:none;">
                 <img src="pics/spinach.png" alt="Spinach Salad" class="recipe-img" loading="lazy">
                 <h3>Spinach & Feta Power Salad</h3>
-                <p>Loaded with Folate (B9) to support healthy cell growth and repair.</p>
+                <p>Loaded with Folate (B9) to support healthy cell growth.</p>
+                <p class="nutrient-stat">Folate: 400 mcg</p>
                 <a href="https://hostessatheart.com/popeye-approved-vegetarian-spinach-power-salad/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-vitB12" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-vitB12" style="display:none;">
                 <img src="pics/stew.png" alt="Stew" class="recipe-img" loading="lazy">
                 <h3>Classic Beef & Vegetable Stew</h3>
-                <p>Rich in Vitamin B12, essential for nerve function and red blood cells.</p>
+                <p>Rich in Vitamin B12, essential for nerve function.</p>
+                <p class="nutrient-stat">Vitamin B12: 2.4 mcg</p>
                 <a href="https://simplebites.net/classic-beef-stew-with-root-vegetables/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
+            
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-vitB12-vegan" style="display:none;">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600" alt="Tofu Stir Fry" class="recipe-img" loading="lazy">
+                <h3>Tempeh & Nutritional Yeast Stir-Fry (Vegan)</h3>
+                <p>Fortified nutritional yeast provides B12 without meat.</p>
+                <p class="nutrient-stat">Vitamin B12: 3.0 mcg</p>
+                <a href="https://www.connoisseurusveg.com/tempeh-stir-fry/" target="_blank" class="btn-outline">View Full Recipe</a>
+            </div>
 
-            <div class="card recipe-card" id="recipe-vitC" style="display:none;">
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-vitC" style="display:none;">
                 <img src="pics/quinoa.png" alt="Peppers" class="recipe-img" loading="lazy">
                 <h3>Quinoa Stuffed Bell Peppers</h3>
-                <p>A vibrant meal containing massive amounts of immune-boosting Vitamin C.</p>
+                <p>Massive amounts of immune-boosting Vitamin C.</p>
+                <p class="nutrient-stat">Vitamin C: 150 mg</p>
                 <a href="https://www.delish.com/cooking/recipe-ideas/a19872947/classic-stuffed-peppers-recipe/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-vitD" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-vitD" style="display:none;">
                 <img src="pics/salmon.png" alt="Salmon" class="recipe-img" loading="lazy">
                 <h3>Pan-Seared Salmon with Asparagus</h3>
-                <p>One of the few natural food sources high in bone-strengthening Vitamin D.</p>
+                <p>High in bone-strengthening Vitamin D.</p>
+                <p class="nutrient-stat">Vitamin D: 600 IU</p>
                 <a href="https://fedandfit.com/pan-seared-salmon/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-vitE" style="display:none;">
+            <div class="card recipe-card vegetarian" id="recipe-vitE" style="display:none;">
                 <img src="pics/kale.png" alt="Bake" class="recipe-img" loading="lazy">
                 <h3>Almond-Crusted Spinach & Kale Bake</h3>
-                <p>High in Vitamin E to protect your cells from oxidative stress.</p>
+                <p>High in Vitamin E to protect your cells.</p>
+                <p class="nutrient-stat">Vitamin E: 15 mg</p>
                 <a href="https://zestoflime.blog/2018/06/12/baked-ziti-with-spinach-kale-pesto/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-vitK" style="display:none;">
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-vitK" style="display:none;">
                 <img src="pics/garlic.png" alt="Broccoli" class="recipe-img" loading="lazy">
                 <h3>Garlic Roasted Broccoli & Kale</h3>
-                <p>Simple greens that provide your body with the Vitamin K needed for clotting.</p>
+                <p>Provides Vitamin K needed for clotting.</p>
+                <p class="nutrient-stat">Vitamin K: 120 mcg</p>
                 <a href="https://realfood.tesco.com/recipes/roasted-kale-and-broccoli.html" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-iron" style="display:none;">
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-iron" style="display:none;">
                 <img src="pics/dal.png" alt="Dal" class="recipe-img" loading="lazy">
                 <h3>Lentil & Spinach Dal</h3>
-                <p>A warm, iron-rich plant-based meal to help boost oxygen in your blood.</p>
+                <p>A warm, iron-rich plant-based meal.</p>
+                <p class="nutrient-stat">Iron: 6.5 mg</p>
                 <a href="https://www.feastingathome.com/lentil-dal-with-spinach/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-magnesium" style="display:none;">
+             <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-iron-vegan" style="display:none;">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600" alt="Quinoa Salad" class="recipe-img" loading="lazy">
+                <h3>Quinoa & Black Bean Salad (Vegan/GF)</h3>
+                <p>Packed with plant-based iron and Vitamin C for absorption.</p>
+                <p class="nutrient-stat">Iron: 4.8 mg</p>
+                <a href="https://cookieandkate.com/best-quinoa-salad-recipe/" target="_blank" class="btn-outline">View Full Recipe</a>
+            </div>
+
+            <div class="card recipe-card vegetarian gluten-free" id="recipe-magnesium" style="display:none;">
                 <img src="pics/dark.png" alt="Energy Bites" class="recipe-img" loading="lazy">
                 <h3>Dark Chocolate & Walnut Energy Bites</h3>
-                <p>A magnesium-rich snack designed for muscle relaxation and recovery.</p>
+                <p>Magnesium-rich snack for muscle recovery.</p>
+                <p class="nutrient-stat">Magnesium: 85 mg</p>
                 <a href="https://lifesewsavory.com/dark-chocolate-walnut-energy-bites/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-zinc" style="display:none;">
+            <div class="card recipe-card vegetarian" id="recipe-zinc" style="display:none;">
                 <img src="pics/pesto.png" alt="Pesto" class="recipe-img" loading="lazy">
                 <h3>Roasted Pumpkin Seed Pesto Pasta</h3>
-                <p>Zinc is vital for healing; pumpkin seeds are an excellent vegetarian source.</p>
+                <p>Pumpkin seeds are an excellent vegetarian source of Zinc.</p>
+                <p class="nutrient-stat">Zinc: 11 mg</p>
                 <a href="https://www.crumbtopbaking.com/creamy-pumpkin-seed-pesto-pasta/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-calcium" style="display:none;">
+             <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-zinc-vegan" style="display:none;">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600" alt="Chickpea Bowl" class="recipe-img" loading="lazy">
+                <h3>Spicy Roasted Chickpea Bowl (Vegan)</h3>
+                <p>Chickpeas and cashews provide a heavy dose of Zinc.</p>
+                <p class="nutrient-stat">Zinc: 8 mg</p>
+                <a href="https://minimalistbaker.com/roasted-chickpea-kale-salad-with-tahini-dressing/" target="_blank" class="btn-outline">View Full Recipe</a>
+            </div>
+
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-calcium" style="display:none;">
                 <img src="pics/chia.png" alt="Pudding" class="recipe-img" loading="lazy">
                 <h3>Chia Seed & Berry Pudding</h3>
-                <p>A calcium-dense breakfast that supports heart rhythm and bone density.</p>
+                <p>Calcium-dense breakfast for strong bones.</p>
+                <p class="nutrient-stat">Calcium: 300 mg</p>
                 <a href="https://www.thehealthymaven.com/berry-chia-pudding/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-potassium" style="display:none;">
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-calcium-vegan" style="display:none;">
+                <img src="https://images.unsplash.com/photo-1505253716371-2695830b5b82?auto=format&fit=crop&w=600" alt="Tofu" class="recipe-img" loading="lazy">
+                <h3>Sesame & Tofu Stir Fry (Lactose Free)</h3>
+                <p>Calcium-set tofu and sesame seeds are dairy-free powerhouses.</p>
+                <p class="nutrient-stat">Calcium: 450 mg</p>
+                <a href="https://www.noracooks.com/tofu-stir-fry/" target="_blank" class="btn-outline">View Full Recipe</a>
+            </div>
+
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-potassium" style="display:none;">
                 <img src="pics/avocado.png" alt="Avocado Smash" class="recipe-img" loading="lazy">
                 <h3>Avocado & White Bean Smash</h3>
-                <p>High in potassium to help regulate blood pressure and muscle function.</p>
+                <p>High in potassium to regulate blood pressure.</p>
+                <p class="nutrient-stat">Potassium: 800 mg</p>
                 <a href="https://www.naturalnourishment.me/recipes/recipe-ready-in-a-flash-avocado-bean-mash" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-selenium" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-selenium" style="display:none;">
                 <img src="pics/steak.png" alt="Tuna Steak" class="recipe-img" loading="lazy">
                 <h3>Garlic Herb Tuna Steaks</h3>
-                <p>One serving provides your daily Selenium to support thyroid health.</p>
+                <p>Provides daily Selenium for thyroid health.</p>
+                <p class="nutrient-stat">Selenium: 90 mcg</p>
                 <a href="https://www.lecremedelacrumb.com/garlic-herb-tuna-steak-marinade/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-copper" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-copper" style="display:none;">
                 <img src="pics/risotto.png" alt="Risotto" class="recipe-img" loading="lazy">
                 <h3>Mushroom & Scallop Risotto</h3>
-                <p>Mushrooms and shellfish are excellent sources for energy-producing copper.</p>
+                <p>Mushrooms and shellfish are excellent for copper.</p>
+                <p class="nutrient-stat">Copper: 1.5 mg</p>
                 <a href="https://britneybreaksbread.com/mushroom-risotto-with-scallops/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-iodine" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-iodine" style="display:none;">
                 <img src="pics/pan.png" alt="Cod" class="recipe-img" loading="lazy">
                 <h3>Pan-Fried Cod with Seaweed Butter</h3>
-                <p>Cod is naturally rich in iodine, which is essential for your metabolism.</p>
+                <p>Cod is naturally rich in iodine for metabolism.</p>
+                <p class="nutrient-stat">Iodine: 150 mcg</p>
                 <a href="https://www.leroyseafood.com/en/tasty-seafood/recipes/pan-fried-cod-with-salad/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-manganese" style="display:none;">
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-manganese" style="display:none;">
                 <img src="pics/oats.png" alt="Oats" class="recipe-img" loading="lazy">
                 <h3>Hazelnuts & Overnight Oats</h3>
-                <p>Oats and nuts are perfect for supporting your bone and tissue formation.</p>
+                <p>Oats and nuts support bone and tissue formation.</p>
+                <p class="nutrient-stat">Manganese: 4.5 mg</p>
                 <a href="https://www.onelovelylife.com/chocolate-hazelnut-overnight-oats/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-phosphorus" style="display:none;">
+            <div class="card recipe-card gluten-free lactose-free" id="recipe-phosphorus" style="display:none;">
                 <img src="pics/chicken.png" alt="Chicken" class="recipe-img" loading="lazy">
                 <h3>Roasted Chicken with Asparagus</h3>
-                <p>Lean protein that provides the phosphorus needed for cell repair.</p>
+                <p>Lean protein providing phosphorus for cell repair.</p>
+                <p class="nutrient-stat">Phosphorus: 350 mg</p>
                 <a href="https://www.lecremedelacrumb.com/sheet-pan-chicken-and-asparagus/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
 
-            <div class="card recipe-card" id="recipe-sodium" style="display:none;">
+            <div class="card recipe-card vegan gluten-free lactose-free" id="recipe-sodium" style="display:none;">
                 <img src="pics/olive.png" alt="Tapenade" class="recipe-img" loading="lazy">
                 <h3>Celery & Olive Tapenade</h3>
-                <p>A natural way to balance sodium levels for fluid regulation.</p>
+                <p>A natural way to balance sodium levels.</p>
+                <p class="nutrient-stat">Sodium: 200 mg</p>
                 <a href="https://mermaidtresses.wordpress.com/2014/11/07/olive-celery-tapenade-vegan/" target="_blank" class="btn-outline">View Full Recipe</a>
             </div>
         </div>
