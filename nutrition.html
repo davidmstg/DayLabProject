@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DayLab | Recommended Food</title>
+    <title>DayLab | Nutrition</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,36 +26,32 @@
 
     <main class="container">
         <section class="text-center" style="padding-top: 100px; padding-bottom: 0; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('pics/nutrition.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 40px;">
-            <h1 style="color: white; margin-bottom: 10px;">Recommended Foods</h1>
-            <p style="color: white; margin-bottom: 30px;">Whole ingredients naturally rich in the vitamins you need.</p>
+            <h1 style="color: white; margin-bottom: 10px;">Grocery List</h1>
+            <p style="color: white; margin-bottom: 30px;">Top food sources to help balance your levels naturally.</p>
             <div class="hero-line" style="background-color: white; opacity: 0.5; margin-bottom: 0; margin-left: auto; margin-right: auto;"></div>
         </section>
 
         <div class="progress-wrapper container" style="margin-bottom: 40px;">
             <div class="progress-steps">
-                <div class="step">1 <span class="step-label">Bloodtest</span></div>
-                <div class="step">2 <span class="step-label">Results</span></div>
-                <div class="step active">3 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Nutrition</span></div>
-                <div class="step">4 <span class="step-label">Recipes</span></div>
+                <a href="bloodtest.html" class="step-link">
+                    <div class="step">1 <span class="step-label">Bloodtest</span></div>
+                </a>
+                <a href="results.html" class="step-link">
+                    <div class="step">2 <span class="step-label">Results</span></div>
+                </a>
+                <a href="nutrition.html" class="step-link">
+                    <div class="step active">3 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Nutrition</span></div>
+                </a>
+                <a href="recipes.html" class="step-link">
+                    <div class="step">4 <span class="step-label">Recipes</span></div>
+                </a>
                 <div class="progress-line"></div>
             </div>
         </div>
-    </main>
 
-        <div class="grocery-note">
-            <div class="note-header text-center">
-                <h2>Grocery List</h2>
+        <div id="food-list-display" class="food-list-container">
             </div>
-            <div id="food-list-display">
-                <p class="text-center" style="color: #666; font-style: italic; padding: 20px;">
-                    No data found. Please go to <a href="bloodtest.html" style="color: var(--accent-red);">Bloodtest</a> first.
-                </p>
-            </div>
-        </div>
 
-        <div class="text-center" style="margin-top: 40px; padding-bottom: 100px;">
-            <a href="recipes.html" class="btn-main">See Meal Ideas</a>
-        </div>
     </main>
 
     <footer class="text-center">
