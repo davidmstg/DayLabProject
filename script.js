@@ -91,14 +91,16 @@ function renderDashboard() {
         if (value === "" || value === undefined || value === null) continue;
 
         const status = getStatus(value, info.min, info.max);
+        
         const cardHTML = `
-            <div class="card status-${status}">
+            <a href="nutrition.html" class="card status-${status}" style="text-decoration: none; display: block; color: inherit; cursor: pointer;">
                 <h3>${info.name}</h3>
                 <div class="score-display">${value} <small>${info.unit}</small></div>
                 <p class="status-label">Status: <strong>${status.toUpperCase()}</strong></p>
                 <hr>
                 <p class="insight-text">${status === 'low' ? info.lowInfo : (status === 'high' ? info.highInfo : info.optimalInfo)}</p>
-            </div>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: #666; font-style: italic;">(Click for nutrition info)</p>
+            </a>
         `;
 
         if (status === "low") { lowCards += cardHTML; }
@@ -144,21 +146,69 @@ function renderNutrition() {
 }
 
 /* =========================================
- 6. RECIPE FILTERING
+ 6. RECIPE FILTERING (UPDATED WITH DIETARY FILTERS)
  ========================================= */
 function renderRecipes() {
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
-    if (!document.getElementById('recipe-vitA')) return; 
+    const recipeGrid = document.getElementById('recipe-grid');
+    
+    // Check if we are actually on the recipe page
+    if (!recipeGrid) return; 
 
+    // 1. Get current checkbox states
+    const isVegan = document.getElementById('check-vegan').checked;
+    const isLactoseFree = document.getElementById('check-lactose').checked;
+    const isGlutenFree = document.getElementById('check-gluten').checked;
+
+    // 2. Hide everything first
+    const allCards = recipeGrid.querySelectorAll('.recipe-card');
+    allCards.forEach(card => card.style.display = 'none');
+
+    let hasRecipes = false;
+
+    // 3. Loop through deficiencies (keys) and show matching cards
     const keys = ["vitA", "vitB1", "vitB6", "vitB9", "vitB12", "vitC", "vitD", "vitE", "vitK", "iron", "magnesium", "zinc", "calcium", "potassium", "selenium", "copper", "iodine", "manganese", "phosphorus", "sodium"];
     
     keys.forEach(key => {
-        const el = document.getElementById(`recipe-${key}`);
-        if (el) el.style.display = needs.includes(key) ? "block" : "none";
+        if (needs.includes(key)) {
+            // Find all cards for this nutrient
+            const relatedCards = recipeGrid.querySelectorAll(`[id^="recipe-${key}"]`);
+            
+            relatedCards.forEach(card => {
+                // 4. Apply Dietary Filters
+                let matchesDiet = true;
+
+                if (isVegan && !card.classList.contains('vegan')) {
+                    matchesDiet = false;
+                }
+                if (isLactoseFree && !card.classList.contains('lactose-free')) {
+                    matchesDiet = false;
+                }
+                if (isGlutenFree && !card.classList.contains('gluten-free')) {
+                    matchesDiet = false;
+                }
+
+                // Only show if it matches BOTH the deficiency and the diet
+                if (matchesDiet) {
+                    card.style.display = "block";
+                    hasRecipes = true;
+                }
+            });
+        }
     });
 
     const msg = document.getElementById('no-recipes-msg');
-    if (msg && needs.length === 0) msg.style.display = "block";
+    if (msg) {
+        if (needs.length === 0) {
+            msg.innerText = "All your levels are optimal! No specific corrective recipes are needed.";
+            msg.style.display = "block";
+        } else if (!hasRecipes) {
+            msg.innerText = "No recipes found matching these dietary preferences.";
+            msg.style.display = "block";
+        } else {
+            msg.style.display = "none";
+        }
+    }
 }
 
 /* =========================================
@@ -167,22 +217,20 @@ function renderRecipes() {
 document.addEventListener('DOMContentLoaded', () => {
     const analyzeBtn = document.getElementById('analyze-btn');
     
-    // Fix: Ensure the click event triggers the function correctly
     if (analyzeBtn) {
         analyzeBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevents the page from just refreshing
+            e.preventDefault(); 
             runAnalysis();
         });
     }
 
-    // These run automatically when the correct page loads
     if (document.getElementById('results-dashboard')) {
         renderDashboard();
     }
     if (document.getElementById('food-list-display')) {
         renderNutrition();
     }
-    if (document.getElementById('recipe-vitA')) {
+    if (document.getElementById('recipe-grid')) {
         renderRecipes();
     }
 });
