@@ -2,7 +2,7 @@
    1. VARIABLES 
    ========================================= */
 :root {
-    --primary-green: #E6F0E4;
+    --primary-green: hsl(230, 66%, 93%);
     --accent-red: #A63A3A;
     --dark-text: #2F4F4F;
     --white: #FFFFFF;
@@ -45,6 +45,25 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 nav ul { display: flex; list-style: none; gap: 30px; }
 nav ul li a { text-decoration: none; color: var(--dark-text); font-weight: 600; transition: color 0.3s; }
 nav ul li a:hover { color: var(--accent-red); }
+
+/* Special Login Button for Header */
+.btn-header-login {
+    background-color: var(--accent-red);
+    color: var(--white) !important; /* Force white color even if links have other styles */
+    padding: 8px 22px;
+    border-radius: 25px; /* Rounded chic style */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-block;
+}
+.btn-header-login:hover {
+    background-color: #8a2e2e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
 
 /* =========================================
    5. TEXT / TYPOGRAPHY 
