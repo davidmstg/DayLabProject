@@ -342,7 +342,6 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     .team-image img { 
         max-width: 100%; 
     }
-
 /* --- Add to the bottom of style.css --- */
 
 /* Clickable Progress Bar Styles */
@@ -389,7 +388,7 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     height: 18px;
     margin-right: 8px;
     cursor: pointer;
-    accent-color: var(--accent-red); /* Matches your theme */
+    accent-color: var(--accent-red); 
 }
 
 /* Nutrient Numbers in Recipes */
