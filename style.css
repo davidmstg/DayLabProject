@@ -11,9 +11,20 @@
 }
 
 /* =========================================
-   2. RESET & BASE 
+   2. RESET & BASE (Updated for Full Width)
    ========================================= */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+}
 
 body {
     background-color: var(--primary-green);
@@ -26,16 +37,22 @@ body {
 }
 
 /* =========================================
-   3. LAYOUT 
+   3. LAYOUT (Container for centered content)
    ========================================= */
+/* The container now centers your content, but backgrounds can stretch outside it */
 .container { 
     max-width: 1100px; 
     width: 100%;
     margin: 0 auto; 
     padding: 0 20px; 
-    flex: 1; 
 }
-section { padding: 40px 0; }
+
+/* Base style for all sections to ensure they take full browser width */
+section { 
+    width: 100%; 
+    padding: 40px 0; 
+}
+
 .text-center { text-align: center; }
 
 /* =========================================
@@ -49,9 +66,9 @@ nav ul li a:hover { color: var(--accent-red); }
 /* Special Login Button for Header */
 .btn-header-login {
     background-color: var(--accent-red);
-    color: var(--white) !important; /* Force white color even if links have other styles */
+    color: var(--white) !important;
     padding: 8px 22px;
-    border-radius: 25px; /* Rounded chic style */
+    border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
     font-size: 0.9rem;
@@ -89,18 +106,15 @@ p { margin-bottom: 15px; }
 /* =========================================
    7. CARDS (RECIPES & RESULTS)
    ========================================= */
-/* Ensure cards don't stretch weirdly - Flex behavior */
 .card { 
     background: var(--white); border-radius: 8px; padding: 20px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-    /* Removing fixed width to allow grid to control sizing */
     width: 100%; 
     min-height: 250px; 
     display: flex;
     flex-direction: column;
 }
 
-/* Status Bars */
 .card.status-low { border-left: 10px solid var(--accent-red); border-top: none; }
 .card.status-optimal { border-left: 10px solid #5CB85C; border-top: none; }
 .card.status-high { border-left: 10px solid #F0AD4E; border-top: none; }
@@ -119,51 +133,23 @@ p { margin-bottom: 15px; }
 .step.active { border-color: var(--accent-red); background-color: var(--accent-red); color: var(--white); }
 .step-label { position: absolute; top: 50px; white-space: nowrap; font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
-/* Clickable Progress Bar Styles */
 .step-link {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+    text-decoration: none; color: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2;
 }
-.step-link:hover .step {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
-}
+.step-link:hover .step { transform: scale(1.1); transition: transform 0.2s ease; }
 
 /* =========================================
    9. DASHBOARDS & FORMS
    ========================================= */
-/* Flex Layout System - This centers the cards perfectly */
 .dashboard-grid, .recipe-grid {
-    display: flex;             
-    flex-wrap: wrap;           
-    justify-content: center;   /* THIS centers the cards */
-    gap: 30px;
-    margin-top: 20px;
-    width: 100%;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px; width: 100%;
 }
 
-/* Ensure cards have a nice width but can shrink if needed */
 .card {
-    background: var(--white);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    
-    flex: 0 1 350px; /* target width 350px */
-    
-    min-width: 300px; 
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
+    background: var(--white); border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    flex: 0 1 350px; min-width: 300px; min-height: 250px; display: flex; flex-direction: column;
 }
 
-/* Input Form Styles */
 .medical-form { padding: 0; overflow: hidden; border: 1px solid var(--gray-border); max-width: 600px; margin: 0 auto; }
 .card-header { background-color: var(--dark-text); color: var(--white); padding: 15px 25px; }
 .form-group { padding: 0 25px 20px 25px; display: flex; flex-direction: column; gap: 8px; }
@@ -172,7 +158,7 @@ p { margin-bottom: 15px; }
 .form-footer { padding: 15px 25px; background-color: #f8fcf8; border-top: 1px solid #eee; text-align: center; }
 
 /* =========================================
-   10. TIMELINE (TRANSPARENT STYLE)
+   10. TIMELINE 
    ========================================= */
 .timeline { position: relative; max-width: 1000px; margin: 40px auto; padding: 20px 0; }
 .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--accent-red); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
@@ -184,7 +170,7 @@ p { margin-bottom: 15px; }
 .phase-label { display: block; color: var(--accent-red); font-weight: bold; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; }
 
 /* =========================================
-   11. SCIENCE & FAQ (TRANSPARENT STYLE)
+   11. SCIENCE & FAQ 
    ========================================= */
 .hero-line { width: 100%; max-width: 800px; height: 1px; background-color: var(--dark-text); margin: 40px auto; opacity: 0.2; }
 .science-section { background-color: transparent; padding: 60px 0; margin-top: 40px; }
@@ -207,16 +193,13 @@ details p { margin-top: 10px; color: #666; }
 footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-border); margin-top: auto; color: #888; font-size: 0.85rem; }
 
 /* =========================================
-   13. MAIN MOBILE RESPONSIVE ENGINE
+   13. MOBILE RESPONSIVE 
    ========================================= */
 @media screen and (max-width: 768px) {
     .container { width: 100% !important; padding: 0 20px !important; }
     nav { flex-direction: column; gap: 15px; }
     nav ul { flex-direction: column; gap: 10px; text-align: center; width: 100%; padding: 0; }
     .card { width: 100% !important; margin: 10px 0 !important; }
-    #results-dashboard, #nutrition-container { flex-direction: column; align-items: center; }
-    .science-grid { flex-direction: column; }
-    .science-img-container { order: -1; }
     .timeline::after { left: 31px; }
     .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; }
     .timeline-item.right { left: 0%; }
