@@ -39,6 +39,7 @@ function getStatus(value, min, max) {
  3. THE ACTION (When button is clicked)
  ========================================= */
 function runAnalysis() {
+    // Collect all 20 biomarkers from the form inputs
     const resultsToSave = {
         vitA: document.getElementById('vitA-input').value,
         vitB1: document.getElementById('vitB1-input').value,
@@ -62,8 +63,21 @@ function runAnalysis() {
         sodium: document.getElementById('sodium-input').value
     };
 
+    // Save current results for the Results Page
     localStorage.setItem('userResults', JSON.stringify(resultsToSave));
 
+    // Update History for the Personal Cabinet (Profile Page)
+    const history = JSON.parse(localStorage.getItem('bloodTestHistory')) || [];
+    
+    const newEntry = {
+        date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString(),
+        data: resultsToSave
+    };
+    
+    history.unshift(newEntry); 
+    localStorage.setItem('bloodTestHistory', JSON.stringify(history));
+
+    // Calculate deficiencies (Low levels)
     const deficiencies = [];
     for (let key in resultsToSave) {
         if (getStatus(resultsToSave[key], healthLibrary[key].min, healthLibrary[key].max) === "low") {
@@ -71,6 +85,7 @@ function runAnalysis() {
         }
     }
 
+    // Save identified deficiencies for nutrition and recipe filtering
     localStorage.setItem('userNeeds', JSON.stringify(deficiencies));
     window.location.href = "results.html";
 }
@@ -243,3 +258,48 @@ document.addEventListener('DOMContentLoaded', () => {
         renderRecipes();
     }
 });
+
+
+/**
+ * Clears user data and redirects to the home page
+ */
+function signOut() {
+    // Show a confirmation dialog to prevent accidental sign-outs
+    if (confirm("Are you sure you want to sign out? Your profile and history will be cleared.")) {
+        // Remove all keys related to DayLab
+        localStorage.removeItem('daylabUserProfile');
+        localStorage.removeItem('userResults');
+        localStorage.removeItem('userNeeds');
+        localStorage.removeItem('bloodTestHistory');
+        // Provide feedback and redirect
+        alert("You have been signed out.");
+        window.location.href = "index.html";
+    }
+}
+
+/**
+ * Dynamic navigation: shows Login or Profile/SignOut based on user session
+ */
+function updateHeader() {
+    const navLinks = document.getElementById('nav-links');
+    if (!navLinks) return;
+
+    // Check if user profile exists in localStorage
+    const user = JSON.parse(localStorage.getItem('daylabUserProfile'));
+
+    if (user) {
+        // If logged in: Show Profile and Sign Out button
+        navLinks.innerHTML += `
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#" onclick="signOut()" class="btn-header-login" style="background-color: #555;">Sign Out</a></li>
+        `;
+    } else {
+        // If NOT logged in: Show the Red Login button
+        navLinks.innerHTML += `
+            <li><a href="login.html" class="btn-header-login">Login</a></li>
+        `;
+    }
+}
+
+// This line makes the function run automatically every time any page loads
+document.addEventListener('DOMContentLoaded', updateHeader);

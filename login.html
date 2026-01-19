@@ -13,15 +13,11 @@
             <a href="index.html" style="display: block; border: none; text-decoration: none;">
                 <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;">
             </a>
-            <ul>
+            <ul id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="bloodtest.html">Bloodtest</a></li>
-                <li><a href="results.html">Results</a></li>
-                <li><a href="nutrition.html">Recommended Food</a></li>
-                <li><a href="recipes.html">Healthy Recipes</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="login.html" class="btn-header-login">Login</a></li>
-            </ul>
+                </ul>
         </nav>
     </header>
 
@@ -140,24 +136,34 @@
         }
 
         /**
-         * Gather user data and save to localStorage
-         */
-        function saveData() {
-            const userData = {
-                email: document.getElementById('email').value,
-                gender: document.getElementById('gender').value,
-                diet: document.getElementById('diet').value,
-                origin: document.getElementById('origin').value,
-                height: document.getElementById('height').value,
-                weight: document.getElementById('weight').value
-            };
-
-            // Store in localStorage for use on other pages
-            localStorage.setItem('daylabUserProfile', JSON.stringify(userData));
-            
-            alert('Thank you, ' + userData.email + '! Your profile is now complete.');
-            window.location.href = "index.html"; // Redirect back to home
+     * Gathers user data, saves it to localStorage, and redirects to the Profile page
+     */
+    function saveData() {
+        // 1. Collect all onboarding data from the form inputs
+        const userData = {
+            email: document.getElementById('email').value,
+            gender: document.getElementById('gender').value,
+            diet: document.getElementById('diet').value,
+            origin: document.getElementById('origin').value,
+            height: document.getElementById('height').value,
+            weight: document.getElementById('weight').value,
+            createdAt: new Date().toLocaleDateString() // Track when the profile was made
+        };
+        // Basic validation check to ensure email is provided
+        if (!userData.email) {
+            alert("Please enter your email address to continue.");
+            return;
         }
-    </script>
+        // Store the profile object in localStorage
+        localStorage.setItem('daylabUserProfile', JSON.stringify(userData));
+        // Initialize an empty blood test history array if it's a new user
+        if (!localStorage.getItem('bloodTestHistory')) {
+            localStorage.setItem('bloodTestHistory', JSON.stringify([]));
+        }
+        // Success feedback and redirection to the Personal Cabinet
+        alert('Thank you, ' + userData.email + '! Your profile is now complete.');
+        window.location.href = "profile.html"; 
+    }
+</script>
 </body>
 </html>
