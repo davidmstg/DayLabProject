@@ -92,7 +92,7 @@ function renderDashboard() {
 
         const status = getStatus(value, info.min, info.max);
         
-        // UPDATED: Now shows the "Normal Range" clearly
+        // --- THIS PART ADDS THE NORMAL RANGE DISPLAY ---
         const cardHTML = `
             <a href="nutrition.html" class="card status-${status}" style="text-decoration: none; display: block; color: inherit; cursor: pointer;">
                 <h3>${info.name}</h3>
@@ -101,7 +101,7 @@ function renderDashboard() {
                     ${value} <small>${info.unit}</small>
                 </div>
                 
-                <p style="font-size: 0.9rem; color: #555; margin-bottom: 5px; background: #f0f0f0; padding: 5px; border-radius: 5px; display:inline-block;">
+                <p style="font-size: 0.9rem; color: #444; margin: 8px 0; background: #eef; padding: 6px; border-radius: 6px; display:inline-block; border: 1px solid #dde;">
                     Normal Range: <strong>${info.min} - ${info.max} ${info.unit}</strong>
                 </p>
 
@@ -161,6 +161,7 @@ function renderRecipes() {
     const needs = JSON.parse(localStorage.getItem('userNeeds')) || [];
     const recipeGrid = document.getElementById('recipe-grid');
     
+    // Check if we are actually on the recipe page
     if (!recipeGrid) return; 
 
     // 1. Get current checkbox states
@@ -179,16 +180,24 @@ function renderRecipes() {
     
     keys.forEach(key => {
         if (needs.includes(key)) {
+            // Find all cards for this nutrient (e.g., recipe-vitB12, recipe-vitB12-vegan)
             const relatedCards = recipeGrid.querySelectorAll(`[id^="recipe-${key}"]`);
             
             relatedCards.forEach(card => {
                 // 4. Apply Dietary Filters
                 let matchesDiet = true;
 
-                if (isVegan && !card.classList.contains('vegan')) matchesDiet = false;
-                if (isLactoseFree && !card.classList.contains('lactose-free')) matchesDiet = false;
-                if (isGlutenFree && !card.classList.contains('gluten-free')) matchesDiet = false;
+                if (isVegan && !card.classList.contains('vegan')) {
+                    matchesDiet = false;
+                }
+                if (isLactoseFree && !card.classList.contains('lactose-free')) {
+                    matchesDiet = false;
+                }
+                if (isGlutenFree && !card.classList.contains('gluten-free')) {
+                    matchesDiet = false;
+                }
 
+                // Only show if it matches BOTH the deficiency and the diet
                 if (matchesDiet) {
                     card.style.display = "block";
                     hasRecipes = true;
