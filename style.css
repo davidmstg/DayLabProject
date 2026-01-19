@@ -342,4 +342,61 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     .team-image img { 
         max-width: 100%; 
     }
+
+/* --- Add to the bottom of style.css --- */
+
+/* Clickable Progress Bar Styles */
+.step-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.step-link:hover .step {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+/* Recipe Filter Bar Styles */
+.filter-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.filter-label {
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    color: #333;
+}
+.filter-option {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.filter-option input {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: var(--accent-red); /* Matches your theme */
+}
+
+/* Nutrient Numbers in Recipes */
+.nutrient-stat {
+    color: #d9534f; /* Accent Red */
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-top: -10px;
+    margin-bottom: 15px;
 }
