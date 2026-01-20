@@ -431,3 +431,36 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     margin: 10px 0;
     text-align: center;
 }
+/* --- Add to bottom of style.css --- */
+
+/* Container for the two columns */
+.form-split-container {
+    display: flex;
+    gap: 40px; /* Space between columns */
+    padding: 25px;
+}
+
+/* Individual columns */
+.form-column {
+    flex: 1; /* Makes them equal width */
+}
+
+/* Section Titles (Vitamins / Minerals) */
+.section-title {
+    font-weight: bold;
+    color: var(--accent-red);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Responsive: Stack them on mobile */
+@media screen and (max-width: 768px) {
+    .form-split-container {
+        flex-direction: column;
+        gap: 0;
+    }
+}
