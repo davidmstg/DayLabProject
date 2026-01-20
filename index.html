@@ -3,140 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DayLab | Home</title>
-    <link rel="stylesheet" href="style.css">
+    <title>DayLab | Personalized Health</title>
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
     <header class="container">
         <nav>
-            <a href="index.html" style="display: block; border: none; text-decoration: none;">
-                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;">
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none; border: none;">
+                <img src="logo1.png" alt="DayLab Logo" style="height: 50px; width: auto; mix-blend-mode: multiply; display: block;" loading="lazy">
             </a>
-            <ul>
+            <ul id="nav-links">
                 <li><a href="index.html" style="color: var(--accent-red);">Home</a></li>
                 <li><a href="bloodtest.html">Bloodtest</a></li>
-                <li><a href="results.html">Results</a></li>
-                <li><a href="nutrition.html">Nutrition</a></li>
-                <li><a href="recipes.html">Healthy Recipes</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="#" class="btn-header-login">Login</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        
-        <section class="text-center" style="padding-top: 100px; padding-bottom: 100px; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('pics/daylab.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-            <h1 style="color: white; margin-bottom: 10px; font-size: 3rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Understand your body.</h1>
-            <h1 style="color: white; margin-bottom: 20px; font-size: 3rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Feed it right.</h1>
-            <p style="color: white; font-size: 1.2rem; margin-bottom: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">Enter your blood results and get a personalized nutrition plan today.</p>
-            <a href="bloodtest.html" class="btn-main" style="background-color: var(--accent-red); color: white; padding: 15px 30px; font-size: 1rem; margin-left: auto; margin-right: auto; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">Start Your Analysis</a>
+        <section class="text-center" style="padding-top: 100px; padding-bottom: 0; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('pics/daylab.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 10px; color: white;">Understand your body.<br>Feed it right.</h1>
+            <p style="font-size: 1.1rem; color: white;">Enter your blood results and get a personalized nutrition plan today.</p>
+            <div class="hero-line" style="background-color: white; opacity: 0.5; margin-bottom: 0;"></div>
+        </section>
+
+        <section>
+            <h2 class="text-center" style="margin-bottom: 40px; color: var(--dark-text);">How it works</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-dot"></div>
+                    <span class="phase-label">Phase 1</span>
+                    <h3>Input Your Data</h3>
+                    <p>Enter your lab data into our secure portal to begin your health journey.</p>
+                    <a href="bloodtest.html" class="btn-outline">Go to Form</a>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-dot"></div>
+                    <span class="phase-label">Phase 2</span>
+                    <h3>Smart Analysis</h3>
+                    <p>We identify your specific vitamin deficiencies based on medical thresholds.</p>
+                </div>
+
+                <div class="timeline-item left">
+                    <div class="timeline-dot"></div>
+                    <span class="phase-label">Phase 3</span>
+                    <h3>Eat & Recover</h3>
+                    <p>Get recipes tailored to your body's needs and start feeling better.</p>
+                </div>
+            </div>
         </section>
 
         <section class="science-section">
             <div class="text-center">
-                <h2>How It Works</h2>
-                <div class="hero-line"></div>
+                <h2 style="margin-bottom: 10px;">Why It Matters</h2>
+                <p style="max-width: 700px; margin: 0 auto; font-size: 0.9rem;">Your blood values are the roadmap to your body's needs. Too many people take supplements or follow diets without knowing what their body truly requires.</p>
             </div>
 
-            <div class="science-grid">
+            <div class="science-grid container">
                 <div class="science-text">
+                    <h2 style="color: #4A8B4A; margin-bottom: 20px;">Science backed</h2>
                     <ul class="science-list">
                         <li>
-                            <span class="science-number">01</span>
+                            <span class="science-number">1</span>
                             <div>
-                                <h3>Input Your Data</h3>
-                                <p>Enter the values from your recent blood test report securely into our system.</p>
+                                <strong>BACKED</strong><br>
+                                <span style="font-size: 0.9rem; color: #666;">Backed by nutrition science</span>
                             </div>
                         </li>
                         <li>
-                            <span class="science-number">02</span>
+                            <span class="science-number">2</span>
                             <div>
-                                <h3>Get Instant Analysis</h3>
-                                <p>We compare your markers against optimal health ranges to find deficiencies.</p>
+                                <strong>EVIDENCE</strong><br>
+                                <span style="font-size: 0.9rem; color: #666;">Evidence-based explanations</span>
                             </div>
                         </li>
                         <li>
-                            <span class="science-number">03</span>
+                            <span class="science-number">3</span>
                             <div>
-                                <h3>Personalized Nutrition</h3>
-                                <p>Receive a tailored grocery list and recipe plan to balance your levels naturally.</p>
+                                <strong>TRUSTWORTHY</strong><br>
+                                <span style="font-size: 0.9rem; color: #666;">Built with medical advisors</span>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="science-img-container">
-                    <img src="pics/science.jpg" alt="Science Analysis" loading="lazy">
+                    <img src="pics/science-tubes.png" alt="Medical Science" loading="lazy">
                 </div>
             </div>
         </section>
 
-        <section>
-            <div class="text-center">
-                <h2>Your Journey</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-dot"></div>
-                    <span class="phase-label">Step 1</span>
-                    <div class="card">
-                        <h3>Blood Test</h3>
-                        <p>Upload or enter your lab results manually.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-dot"></div>
-                    <span class="phase-label">Step 2</span>
-                    <div class="card">
-                        <h3>Analysis</h3>
-                        <p>Our algorithm identifies your vitamin needs.</p>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-dot"></div>
-                    <span class="phase-label">Step 3</span>
-                    <div class="card">
-                        <h3>Nutrition</h3>
-                        <p>Get a list of foods rich in what you lack.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-dot"></div>
-                    <span class="phase-label">Step 4</span>
-                    <div class="card">
-                        <h3>Recipes</h3>
-                        <p>Cook meals designed to heal your body.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section style="max-width: 800px; margin: 0 auto; padding-bottom: 80px;">
-            <div class="text-center" style="margin-bottom: 40px;">
-                <h2>Frequently Asked Questions</h2>
-            </div>
+        <section style="max-width: 700px; margin: 40px auto;">
+            <h2 class="text-center" style="margin-bottom: 30px; color: #4A8B4A;">Frequently Asked Questions</h2>
             
             <details>
-                <summary>Is my medical data safe?</summary>
-                <p>Yes. Your data is processed locally on your device for analysis and is never sold to third parties.</p>
+                <summary>Do I need to upload my blood test?</summary>
+                <p>No, you simply type the numbers into our secure form. We do not store files or PDFs.</p>
             </details>
 
             <details>
-                <summary>Do I need a doctor's referral?</summary>
-                <p>No, you can use results from any standard blood test you have already taken.</p>
+                <summary>Is my data stored safely?</summary>
+                <p>Yes. Your data is processed locally in your browser session and is not shared with third parties.</p>
             </details>
 
             <details>
-                <summary>Are the recipes vegan friendly?</summary>
-                <p>Yes! Our recipe engine allows you to filter by Vegan, Vegetarian, Gluten-Free, and Lactose-Free options.</p>
+                <summary>Do I get real recipes?</summary>
+                <p>Absolutely. We provide links to trusted, full recipes that specifically target the vitamins you are missing.</p>
             </details>
+        </section>
+
+        <section class="text-center" style="margin-bottom: 80px;">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">Start your DAYLAB journey today.</h2>
+            <p>No more guessing what your body needs. Let your blood guide you.</p>
+            <a href="bloodtest.html" class="btn-main">Start your free analysis</a>
         </section>
 
     </main>
 
-    <footer class="text-center">
-        <p>&copy; 2025 DayLab Project</p>
+    <footer class="text-center final-footer">
+        <p>&copy; 2025 DAYLAB – All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
