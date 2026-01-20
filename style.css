@@ -13,7 +13,18 @@
 /* =========================================
    2. RESET & BASE
    ========================================= */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+}
 
 body {
     background-color: var(--primary-green);
@@ -26,7 +37,7 @@ body {
 }
 
 /* =========================================
-   3. LAYOUT (Centered Container)
+   3. LAYOUT (The Fix for the "Stretched" Look)
    ========================================= */
 .container { 
     max-width: 1100px; 
@@ -35,7 +46,11 @@ body {
     padding: 0 20px; 
 }
 
-section { padding: 40px 0; }
+section { 
+    width: 100%; 
+    padding: 40px 0; 
+}
+
 .text-center { text-align: center; }
 
 /* =========================================
@@ -56,7 +71,7 @@ nav ul {
     display: flex; 
     list-style: none; 
     gap: 30px; 
-    align-items: center; /* Aligns links with button */
+    align-items: center; 
 }
 
 nav ul li a { 
@@ -67,7 +82,7 @@ nav ul li a {
 }
 nav ul li a:hover { color: var(--accent-red); }
 
-/* Login Button in Header */
+/* Login Button */
 .btn-header-login {
     background-color: var(--accent-red);
     color: var(--white) !important;
@@ -103,27 +118,33 @@ p { margin-bottom: 15px; }
 }
 .btn-main:hover { background: #8a2e2e; transform: translateY(-2px); }
 
+.btn-outline {
+    display: inline-block; margin-top: 10px; padding: 5px 15px; border: 1px solid var(--accent-red);
+    color: var(--accent-red); text-decoration: none; border-radius: 4px; font-size: 0.8rem; font-weight: bold;
+}
+
 /* =========================================
-   7. CARDS & GRID SYSTEM
+   7. CARDS (RECIPES & RESULTS)
    ========================================= */
-/* This centers the Results & Recipes cards */
+/* This centers the items perfectly */
 .dashboard-grid, .recipe-grid {
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 30px; 
-    margin-top: 20px; 
+    display: flex;             
+    flex-wrap: wrap;           
+    justify-content: center;   
+    gap: 30px;
+    margin-top: 20px;
     width: 100%;
 }
 
 .card { 
     background: var(--white); border-radius: 8px; padding: 20px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-    flex: 0 1 350px; /* target width */
-    min-width: 300px; 
+    width: 100%; 
     min-height: 250px; 
     display: flex;
     flex-direction: column;
+    /* Flex sizing for grid items */
+    flex: 0 1 350px; 
 }
 
 .card.status-low { border-left: 10px solid var(--accent-red); border-top: none; }
@@ -150,7 +171,7 @@ p { margin-bottom: 15px; }
 .step-link:hover .step { transform: scale(1.1); transition: transform 0.2s ease; }
 
 /* =========================================
-   9. BLOODTEST FORMS (Separate Cards Layout)
+   9. BLOODTEST (Old Form Styles)
    ========================================= */
 .medical-form { padding: 0; overflow: hidden; border: 1px solid var(--gray-border); max-width: 600px; margin: 0 auto; }
 .card-header { background-color: var(--dark-text); color: var(--white); padding: 15px 25px; }
@@ -158,38 +179,6 @@ p { margin-bottom: 15px; }
 .input-wrapper { position: relative; display: flex; align-items: center; }
 .input-wrapper input { width: 100%; padding: 14px 15px; border: 2px solid #e0e0e0; border-radius: 6px; }
 .form-footer { padding: 15px 25px; background-color: #f8fcf8; border-top: 1px solid #eee; text-align: center; }
-
-/* New Split Layout for Bloodtest */
-.lab-grid-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-    flex-wrap: wrap; 
-}
-.lab-card {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    flex: 1;           
-    min-width: 320px;  
-    padding: 0;        
-    border: 1px solid #eee;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-.lab-card-header {
-    background-color: #2F4F4F;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-.lab-card-body { padding: 30px; }
 
 /* =========================================
    10. TIMELINE 
@@ -227,7 +216,7 @@ details p { margin-top: 10px; color: #666; }
 footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-border); margin-top: auto; color: #888; font-size: 0.85rem; }
 
 /* =========================================
-   13. RECIPES IMAGE FIX
+   13. RECIPES PAGE STYLES (Restored!)
    ========================================= */
 .recipe-card img {
     width: 100%;
@@ -235,6 +224,76 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     object-fit: cover;   
     border-radius: 6px;  
     margin-bottom: 15px;
+}
+
+/* Filter Bar Styles */
+.filter-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.filter-label {
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    color: #333;
+}
+.filter-option {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.filter-option input {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: var(--accent-red); 
+}
+
+.nutrient-stat {
+    color: #d9534f;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   14. NUTRITION GROCERY LIST (Restored!)
+   ========================================= */
+#food-list-display {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.food-row {
+    background: var(--white);
+    padding: 18px 25px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    font-weight: 500;
+    color: var(--dark-text);
+}
+.nutrient-name {
+    background: var(--accent-red);
+    color: var(--white);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 .normal-range-box {
     background-color: #f1f8e9; 
@@ -248,25 +307,156 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
 }
 
 /* =========================================
-   14. NUTRITION LIST
+   15. ABOUT PAGE STYLES (Restored!)
    ========================================= */
-#food-list-display { width: 100%; max-width: 600px; margin: 0 auto; }
-.food-row {
-    background: var(--white);
-    padding: 18px 25px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    display: flex; justify-content: space-between; align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    font-weight: 500; color: var(--dark-text);
+.about-hero {
+    padding: 120px 0;
+    background-color: var(--dark-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-.nutrient-name {
-    background: var(--accent-red); color: var(--white); padding: 5px 12px; border-radius: 20px;
-    font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;
+.about-hero h1 {
+    color: var(--white);
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: 3px;
+    text-transform: none;
+}
+.mission-intro { 
+    padding: 80px 0; 
+    background-color: var(--primary-green);
+}
+.mission-intro h2 { 
+    font-size: 2.2rem; 
+    max-width: 900px; 
+    margin: 0 auto 20px; 
+    line-height: 1.3; 
+    color: var(--dark-text);
+}
+.mission-intro p { 
+    max-width: 700px; 
+    margin: 0 auto; 
+    color: #555; 
+    font-size: 1.1rem;
+}
+.team-row { padding: 80px 0; }
+.white-bg { background-color: var(--white); }
+.green-bg { background-color: var(--primary-green); }
+
+.split { 
+    display: flex; 
+    align-items: center; 
+    gap: 60px; 
+}
+.split.reverse { flex-direction: row-reverse; }
+
+.team-image { flex: 1; }
+.team-image img { 
+    width: 100%; 
+    max-width: 450px; 
+    border-radius: 8px; 
+    display: block; 
+    margin: 0 auto; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.team-info { flex: 1; }
+.role-label { 
+    display: block; 
+    color: #888; 
+    font-size: 0.9rem; 
+    margin-bottom: 10px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+.team-info h3 { 
+    font-size: 2.2rem; 
+    margin-bottom: 15px; 
+    color: var(--dark-text); 
+}
+.team-info p { 
+    margin-bottom: 30px; 
+    line-height: 1.8; 
+    color: #444; 
+}
+
+.btn-linkedin {
+    background-color: var(--accent-red);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 40px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.btn-linkedin:hover { 
+    background-color: #8a2e2e; 
+    transform: translateY(-2px); 
+}
+
+.contact-footer { 
+    padding: 100px 0; 
+    background-color: var(--white); 
+}
+.contact-bar { 
+    background-color: #f8fcf8; 
+    padding: 40px; 
+    border-radius: 12px; 
+    margin-top: 50px; 
+    border: 1px solid #eee;
+    text-align: center;
+}
+.final-footer { 
+    padding: 60px 0; 
+    background-color: #f0f0f0; 
+    color: #111; 
+    font-weight: bold; 
+    font-size: 2rem; 
+    border-top: 1px solid #ddd; 
 }
 
 /* =========================================
-   15. MOBILE RESPONSIVE 
+   16. BLOODTEST SPLIT LAYOUT (Two separate cards)
+   ========================================= */
+.lab-grid-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap; 
+}
+
+.lab-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    flex: 1;           
+    min-width: 320px;  
+    padding: 0;        
+    border: 1px solid #eee;
+    overflow: hidden;  
+    margin-bottom: 20px;
+}
+
+.lab-card-header {
+    background-color: #2F4F4F;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.lab-card-body { padding: 30px; }
+
+
+/* =========================================
+   17. MOBILE RESPONSIVE (Global)
    ========================================= */
 @media screen and (max-width: 768px) {
     .container { width: 100% !important; padding: 0 20px !important; }
@@ -277,23 +467,13 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left; }
     .timeline-item.right { left: 0%; }
     .timeline-dot { left: 21px; right: auto; }
+    
+    /* About Page Mobile */
+    .split, .split.reverse { flex-direction: column; text-align: center; gap: 40px; }
+    .about-hero h1 { font-size: 2.5rem; }
+    .team-image img { max-width: 100%; }
+
+    /* Bloodtest Mobile */
     .lab-grid-container { flex-direction: column; align-items: center; }
     .lab-card { width: 100%; max-width: 500px; }
-    .science-grid { flex-direction: column; }
-    .science-img-container { order: -1; }
-}
-
-/* =========================================
-   16. ABOUT PAGE (Cleaned up)
-   ========================================= */
-.about-hero { padding: 120px 0; background-color: var(--dark-text); text-align: center; }
-.about-hero h1 { color: var(--white); margin: 0; }
-.mission-intro { padding: 80px 0; }
-.split { display: flex; align-items: center; gap: 60px; }
-.split.reverse { flex-direction: row-reverse; }
-.team-image img { width: 100%; max-width: 450px; border-radius: 8px; display: block; margin: 0 auto; }
-.team-info { flex: 1; }
-.contact-bar { background-color: #f8fcf8; padding: 40px; border-radius: 12px; margin-top: 50px; border: 1px solid #eee; text-align: center; }
-@media screen and (max-width: 768px) {
-    .split, .split.reverse { flex-direction: column; text-align: center; gap: 40px; }
 }
