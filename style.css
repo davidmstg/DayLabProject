@@ -11,7 +11,7 @@
 }
 
 /* =========================================
-   2. RESET & BASE (Updated for Full Width)
+   2. RESET & BASE
    ========================================= */
 * { 
     margin: 0; 
@@ -23,7 +23,7 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+    overflow-x: hidden; 
 }
 
 body {
@@ -37,9 +37,8 @@ body {
 }
 
 /* =========================================
-   3. LAYOUT (Container for centered content)
+   3. LAYOUT
    ========================================= */
-/* The container now centers your content, but backgrounds can stretch outside it */
 .container { 
     max-width: 1100px; 
     width: 100%;
@@ -47,7 +46,6 @@ body {
     padding: 0 20px; 
 }
 
-/* Base style for all sections to ensure they take full browser width */
 section { 
     width: 100%; 
     padding: 40px 0; 
@@ -56,7 +54,7 @@ section {
 .text-center { text-align: center; }
 
 /* =========================================
-   4. NAVIGATION 
+   4. NAVIGATION
    ========================================= */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
 nav ul { display: flex; list-style: none; gap: 30px; }
@@ -373,7 +371,7 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     .team-image img { 
         max-width: 100%; 
     }
-} /* <--- THIS WAS THE MISSING BRACKET THAT BROKE YOUR LAYOUT! */
+}
 
 
 /* =========================================
@@ -431,36 +429,119 @@ footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--gray-b
     margin: 10px 0;
     text-align: center;
 }
-/* --- Add to bottom of style.css --- */
 
-/* Container for the two columns */
-.form-split-container {
+/* =========================================
+   18. BLOODTEST: TWO SEPARATE CARDS LAYOUT
+   ========================================= */
+.lab-grid-container {
     display: flex;
-    gap: 40px; /* Space between columns */
-    padding: 25px;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Stacks on mobile */
 }
 
-/* Individual columns */
-.form-column {
-    flex: 1; /* Makes them equal width */
-}
-
-/* Section Titles (Vitamins / Minerals) */
-.section-title {
-    font-weight: bold;
-    color: var(--accent-red);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+.lab-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    flex: 1;           /* Both cards take equal width */
+    min-width: 320px;  /* Minimum width before stacking */
+    padding: 0;        /* Reset padding for header/body split */
+    border: 1px solid #eee;
+    overflow: hidden;  /* Keeps header corners rounded */
+    display: block;    /* Override default .card flex behavior */
     margin-bottom: 20px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
 }
 
-/* Responsive: Stack them on mobile */
+.lab-card-header {
+    background-color: #2F4F4F; /* Dark Green Header */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.lab-card-body {
+    padding: 30px;
+}
+
 @media screen and (max-width: 768px) {
-    .form-split-container {
+    .lab-grid-container {
         flex-direction: column;
-        gap: 0;
+        align-items: center;
+    }
+    .lab-card {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+/* =========================================
+   19. HOME PAGE: FULL WIDTH LAYOUT
+   ========================================= */
+header.full-width {
+    width: 100%;
+    background-color: var(--primary-green);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* This stretches the nav bar to the edges */
+header.full-width nav {
+    width: 100%;
+    padding: 20px 40px; /* 40px spacing from the edges */
+    max-width: 100%;    /* Removes the 1100px limit */
+    display: flex;
+    justify-content: space-between; /* Pushes Logo Left, Links Right */
+    align-items: center;
+}
+
+/* Updated Hero Section for Full Width */
+.hero-full-width {
+    width: 100%;
+    height: 500px; /* Taller, impressive image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+/* Overlay to make text readable on the image */
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.5); /* Darkens the image slightly */
+    padding: 40px;
+    border-radius: 8px;
+}
+
+/* Full Width Hero for Pages like Bloodtest/Results */
+.hero-section {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 100px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* On mobile, reduce side padding for header */
+@media screen and (max-width: 768px) {
+    header.full-width nav, header { 
+        padding: 0 20px; 
     }
 }
