@@ -5,56 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DayLab | Bloodtest Entry</title>
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* LAYOUT FOR TWO SEPARATE CARDS */
-        .lab-grid-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px; /* Gap between the two cards */
-            max-width: 1000px;
-            margin: 0 auto;
-            flex-wrap: wrap; /* Stacks on mobile */
-        }
-
-        .lab-card {
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            flex: 1;           /* Both cards take equal width */
-            min-width: 320px;  /* Minimum width before stacking */
-            padding: 0;        /* Reset padding for header/body split */
-            border: 1px solid #eee;
-            overflow: hidden;  /* Keeps header corners rounded */
-        }
-
-        .lab-card-header {
-            background-color: #2F4F4F; /* Dark Green Header */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .lab-card-body {
-            padding: 30px;
-        }
-
-        /* Responsive: Stack on mobile */
-        @media screen and (max-width: 768px) {
-            .lab-grid-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .lab-card {
-                width: 100%;
-                max-width: 500px;
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -70,12 +20,13 @@
                 <li><a href="nutrition.html">Nutrition</a></li>
                 <li><a href="recipes.html">Healthy Recipes</a></li>
                 <li><a href="about.html">About Us</a></li>
+                <li><a href="#" class="btn-header-login">Login</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <section class="text-center" style="padding-top: 100px; padding-bottom: 0; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('pics/bloodtest.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 40px;">
+        <section class="text-center" style="padding-top: 100px; padding-bottom: 0; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('pics/bloodtest.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; margin-bottom: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
             <h1 style="color: white; margin-bottom: 10px;">Laboratory Data Entry</h1>
             <p style="color: white; margin-bottom: 30px;">Enter your results precisely as they appear on your medical report.</p>
             <div class="hero-line" style="background-color: white; opacity: 0.5; margin-bottom: 0; margin-left: auto; margin-right: auto;"></div>
@@ -100,7 +51,6 @@
         </div>
    
         <section style="padding-bottom: 100px;">
-            
             <div class="lab-grid-container">
                 
                 <div class="lab-card">
@@ -119,7 +69,8 @@
                 </div>
 
                 <div class="lab-card">
-                    <div class="lab-card-header" style="background-color: #A63A3A;">Minerals</div> <div class="lab-card-body">
+                    <div class="lab-card-header" style="background-color: #A63A3A;">Minerals</div>
+                    <div class="lab-card-body">
                         <div class="form-group"><label>Iron (Ferritin)</label><div class="input-wrapper"><input type="number" id="iron-input" placeholder="0.0"><span class="unit">ng/mL</span></div></div>
                         <div class="form-group"><label>Magnesium</label><div class="input-wrapper"><input type="number" id="magnesium-input" placeholder="0.0"><span class="unit">mg/dL</span></div></div>
                         <div class="form-group"><label>Zinc</label><div class="input-wrapper"><input type="number" id="zinc-input" placeholder="0.0"><span class="unit">µg/dL</span></div></div>
