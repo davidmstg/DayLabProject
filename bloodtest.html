@@ -3,39 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DayLab | Personal Health</title>
+    <title>DayLab | Bloodtest Entry</title>
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* Container for the two columns */
-        .form-split-container {
+        /* LAYOUT FOR TWO SEPARATE CARDS */
+        .lab-grid-container {
             display: flex;
-            gap: 40px; /* Space between columns */
-            padding: 25px;
+            justify-content: center;
+            gap: 30px; /* Gap between the two cards */
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap; /* Stacks on mobile */
         }
 
-        /* Individual columns */
-        .form-column {
-            flex: 1; /* Makes them equal width */
+        .lab-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;           /* Both cards take equal width */
+            min-width: 320px;  /* Minimum width before stacking */
+            padding: 0;        /* Reset padding for header/body split */
+            border: 1px solid #eee;
+            overflow: hidden;  /* Keeps header corners rounded */
         }
 
-        /* Section Titles (Vitamins / Minerals) */
-        .section-title {
+        .lab-card-header {
+            background-color: #2F4F4F; /* Dark Green Header */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #A63A3A; /* Your accent red */
-            text-transform: uppercase;
-            font-size: 0.9rem;
             letter-spacing: 1px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        /* Responsive: Stack them on mobile phones */
+        .lab-card-body {
+            padding: 30px;
+        }
+
+        /* Responsive: Stack on mobile */
         @media screen and (max-width: 768px) {
-            .form-split-container {
+            .lab-grid-container {
                 flex-direction: column;
-                gap: 0;
+                align-items: center;
+            }
+            .lab-card {
+                width: 100%;
+                max-width: 500px;
             }
         }
     </style>
@@ -65,7 +81,7 @@
             <div class="hero-line" style="background-color: white; opacity: 0.5; margin-bottom: 0; margin-left: auto; margin-right: auto;"></div>
         </section>
 
-        <div class="progress-wrapper container" style="margin-bottom: 40px;">
+        <div class="progress-wrapper container" style="margin-bottom: 50px;">
             <div class="progress-steps">
                 <a href="bloodtest.html" class="step-link">
                     <div class="step active">1 <span class="step-label" style="color: var(--accent-red); font-weight: bold;">Bloodtest</span></div>
@@ -83,17 +99,13 @@
             </div>
         </div>
    
-        <section style="max-width: 900px; margin: 0 auto; padding-bottom: 100px;">
-            <div class="card medical-form">
-                <div class="card-header">
-                    <h3>Digital Lab Entry</h3>
-                </div>
-    
-                <div class="form-split-container">
-                    
-                    <div class="form-column">
-                        <div class="section-title">Vitamins</div>
-                        
+        <section style="padding-bottom: 100px;">
+            
+            <div class="lab-grid-container">
+                
+                <div class="lab-card">
+                    <div class="lab-card-header">Vitamins</div>
+                    <div class="lab-card-body">
                         <div class="form-group"><label>Vitamin A</label><div class="input-wrapper"><input type="number" id="vitA-input" placeholder="0.0"><span class="unit">µg/dL</span></div></div>
                         <div class="form-group"><label>Vitamin B1</label><div class="input-wrapper"><input type="number" id="vitB1-input" placeholder="0.0"><span class="unit">nmol/L</span></div></div>
                         <div class="form-group"><label>Vitamin B6</label><div class="input-wrapper"><input type="number" id="vitB6-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
@@ -104,10 +116,10 @@
                         <div class="form-group"><label>Vitamin E</label><div class="input-wrapper"><input type="number" id="vitE-input" placeholder="0.0"><span class="unit">mg/L</span></div></div>
                         <div class="form-group"><label>Vitamin K</label><div class="input-wrapper"><input type="number" id="vitK-input" placeholder="0.0"><span class="unit">nmol/L</span></div></div>
                     </div>
+                </div>
 
-                    <div class="form-column">
-                        <div class="section-title">Minerals & Trace Elements</div>
-
+                <div class="lab-card">
+                    <div class="lab-card-header" style="background-color: #A63A3A;">Minerals</div> <div class="lab-card-body">
                         <div class="form-group"><label>Iron (Ferritin)</label><div class="input-wrapper"><input type="number" id="iron-input" placeholder="0.0"><span class="unit">ng/mL</span></div></div>
                         <div class="form-group"><label>Magnesium</label><div class="input-wrapper"><input type="number" id="magnesium-input" placeholder="0.0"><span class="unit">mg/dL</span></div></div>
                         <div class="form-group"><label>Zinc</label><div class="input-wrapper"><input type="number" id="zinc-input" placeholder="0.0"><span class="unit">µg/dL</span></div></div>
@@ -115,4 +127,29 @@
                         <div class="form-group"><label>Potassium</label><div class="input-wrapper"><input type="number" id="potassium-input" placeholder="0.0"><span class="unit">mmol/L</span></div></div>
                         <div class="form-group"><label>Selenium</label><div class="input-wrapper"><input type="number" id="selenium-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
                         <div class="form-group"><label>Copper</label><div class="input-wrapper"><input type="number" id="copper-input" placeholder="0.0"><span class="unit">µg/dL</span></div></div>
-                        <div class="form-group"><label>Iodine</label><div class="input-wrapper"><input type="number" id="iodine-input" placeholder="0.0
+                        <div class="form-group"><label>Iodine</label><div class="input-wrapper"><input type="number" id="iodine-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
+                        <div class="form-group"><label>Manganese</label><div class="input-wrapper"><input type="number" id="manganese-input" placeholder="0.0"><span class="unit">µg/L</span></div></div>
+                        <div class="form-group"><label>Phosphorus</label><div class="input-wrapper"><input type="number" id="phosphorus-input" placeholder="0.0"><span class="unit">mg/dL</span></div></div>
+                        <div class="form-group"><label>Sodium</label><div class="input-wrapper"><input type="number" id="sodium-input" placeholder="0.0"><span class="unit">mmol/L</span></div></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="margin: 40px auto; text-align: center; max-width: 400px;">
+                <button id="analyze-btn" class="btn-main" style="width: 100%; font-size: 1.1rem; padding: 15px;">Analyze My Results</button>
+                <p style="margin-top: 15px; color: #777; font-size: 0.9rem;">
+                    Your data is processed locally and never stored on our servers.
+                </p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="text-center">
+        <p>&copy; 2025 DayLab Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
